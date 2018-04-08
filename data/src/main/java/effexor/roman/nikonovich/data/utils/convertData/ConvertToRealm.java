@@ -1,4 +1,4 @@
-package effexor.roman.nikonovich.data.repostitory;
+package effexor.roman.nikonovich.data.utils.convertData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,13 @@ import io.realm.RealmList;
 
 public class ConvertToRealm {
 
-    public static List<MakeCarRealm> convertList(List<MakeCarNet> makeCarNets) {
+    public static List<MakeCarRealm> convertList(List<MakeCarNet> makeCarNetNets) {
 
         List<MakeCarRealm> carRealms = new ArrayList<>();
         RealmList<ModelCarRealm> modelCarRealms;
         MakeCarRealm makeCarRealm;
         ModelCarRealm modelCarRealm;
-        for (MakeCarNet make : makeCarNets) {
+        for (MakeCarNet make : makeCarNetNets) {
             makeCarRealm = new MakeCarRealm();
             makeCarRealm.setIdCar(make.getIdCar());
             makeCarRealm.setMakeCar(make.getMakeCar());

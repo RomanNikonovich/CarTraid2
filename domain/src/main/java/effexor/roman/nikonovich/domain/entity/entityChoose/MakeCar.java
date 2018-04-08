@@ -8,9 +8,12 @@ public class MakeCar {
     private int idCar;
     private List<Model> modelsCars;
 
-    public MakeCar(String makeCar, int idCar, List<Model> modelsCars) {
+    public MakeCar(String makeCar, int idCar) {
         this.makeCar = makeCar;
         this.idCar = idCar;
+    }
+
+    public void setModelsCars(List<Model> modelsCars) {
         this.modelsCars = modelsCars;
     }
 

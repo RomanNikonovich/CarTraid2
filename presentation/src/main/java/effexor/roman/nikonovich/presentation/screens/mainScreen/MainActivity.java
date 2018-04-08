@@ -17,7 +17,6 @@ public class MainActivity extends
     @Override
     public MainActViewModel provideViewModel() {
         return ViewModelProviders.of(this).get(MainActViewModel.class);
-
     }
 
     @Override

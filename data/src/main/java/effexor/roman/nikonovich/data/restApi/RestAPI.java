@@ -7,7 +7,8 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 public interface RestAPI {
+    String URL = "data/MakeCar?pageSize=100&sortBy=makeCar%20asc";
 
-    @GET("data/MakeCar?pageSize=100&sortBy=makeCar%20asc")
+    @GET(URL)
     Observable<List<MakeCarNet>> loadMakes();
 }

@@ -19,4 +19,6 @@ public abstract class BaseUseCase {
         this.postExecutionThread = postExecutionThread.getScheduler();
         this.threadExecution = threadExecution;
     }
+
+
 }

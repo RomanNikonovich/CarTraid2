@@ -21,6 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class AppModule {
+
     private static final String BASE_URL = "https://api.backendless.com/BF19A022-69A2-3ED3-FFD7-F67EA8461100/98E8FC21-EF0E-72F6-FF48-A89A5B17B600/";
     Context context;
 
@@ -61,11 +62,5 @@ public class AppModule {
                 .baseUrl(BASE_URL)
                 .build();
     }
-
- /*   @Provides
-    public Realm getRealm(){
-        return Realm.getDefaultInstance();
-    }*/
-
 
 }

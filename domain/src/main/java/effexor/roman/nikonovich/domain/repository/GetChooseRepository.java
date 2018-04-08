@@ -1,14 +1,16 @@
 package effexor.roman.nikonovich.domain.repository;
 
 
-import effexor.roman.nikonovich.domain.entity.entityChoose.ChooseCars;
+import java.util.List;
+
+import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
 import io.reactivex.Completable;
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 
 public interface GetChooseRepository {
 
     Completable loadChoose();
 
-    Observable<ChooseCars> getChoose();
+    Flowable<List<MakeCar>> getChoose();
 
 }

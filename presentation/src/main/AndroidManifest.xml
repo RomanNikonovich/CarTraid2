@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="effexor.roman.nikonovich">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -10,13 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".presentation.screens.mainScreen.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".presentation.screens.formFilling.AddNewSearch" />
+        <activity android:name=".presentation.screens.setting.Setting" />
+        <activity android:name=".presentation.screens.contactDeveloper.ContactDeveloper" />
+        <activity android:name=".presentation.screens.aboutApp.AboutApp" />
+        <activity android:name=".presentation.screens.searchCar.SearchCars"/>
     </application>
 
 </manifest>

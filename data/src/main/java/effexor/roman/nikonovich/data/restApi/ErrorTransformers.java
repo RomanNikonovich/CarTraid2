@@ -3,6 +3,7 @@ package effexor.roman.nikonovich.data.restApi;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import effexor.roman.nikonovich.data.entity.ErrorType;
@@ -14,6 +15,10 @@ import io.reactivex.functions.Function;
 
 @Singleton
 public class ErrorTransformers {
+    @Inject
+    public ErrorTransformers() {
+    }
+
     public <Model, ErrorThrowable extends ParseError> ObservableTransformer<Model, Model> parseHttpError() {
 
         return new ObservableTransformer<Model, Model>() {

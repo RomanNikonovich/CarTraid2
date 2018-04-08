@@ -8,6 +8,6 @@ import retrofit2.http.GET;
 
 public interface RestAPI {
 
-    @GET("data/MakeCar?pageSize=100&sortBy=makeCarR%20asc")
+    @GET("data/MakeCar?pageSize=100&sortBy=makeCar%20asc")
     Observable<List<MakeCarNet>> loadMakes();
 }

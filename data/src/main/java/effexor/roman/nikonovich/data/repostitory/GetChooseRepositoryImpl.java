@@ -21,9 +21,9 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
     private Realm realm;
 
     @Inject
-    public GetChooseRepositoryImpl(RestService restService, Realm realm) {
+    public GetChooseRepositoryImpl(RestService restService) {
         this.restService = restService;
-        this.realm = realm;
+
     }
 
     @Override
@@ -41,6 +41,7 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
                 .doOnNext(new Consumer<List<MakeCarRealm>>() {
                     @Override
                     public void accept(List<MakeCarRealm> list) throws Exception {
+                        realm = Realm.getDefaultInstance();
                         realm.beginTransaction();
                         realm.insert(list);
                         realm.commitTransaction();

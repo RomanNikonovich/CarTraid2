@@ -3,9 +3,9 @@ package effexor.roman.nikonovich.app;
 
 import android.app.Application;
 
-import effexor.roman.nikonovich.huckster.injection.AppComponent;
-import effexor.roman.nikonovich.huckster.injection.AppModule;
-import effexor.roman.nikonovich.huckster.injection.DaggerAppComponent;
+import effexor.roman.nikonovich.injection.AppComponent;
+import effexor.roman.nikonovich.injection.AppModule;
+import effexor.roman.nikonovich.injection.DaggerAppComponent;
 import io.realm.Realm;
 
 

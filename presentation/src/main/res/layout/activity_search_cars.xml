@@ -6,17 +6,12 @@
 
         <variable
             name="viewModel"
-            type="effexor.roman.nikonovich.presentation.screens.mainScreen.MainActViewModel" />
+            type="effexor.roman.nikonovich.presentation.screens.searchCar.SearchCarsViewModel" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView style="@style/styleRecycleView" />
-
-        <Button style="@style/styleBtnAdd"
-            android:id="@+id/btn"/>
 
     </RelativeLayout>
 </layout>

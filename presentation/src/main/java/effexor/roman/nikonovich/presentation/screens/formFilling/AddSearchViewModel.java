@@ -1,5 +1,8 @@
 package effexor.roman.nikonovich.presentation.screens.formFilling;
 
+import android.databinding.ObservableField;
+import android.text.Editable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,8 @@ import effexor.roman.nikonovich.presentation.base.BaseViewModel;
 import io.reactivex.functions.Consumer;
 
 public class AddSearchViewModel extends BaseViewModel {
+
+    private ObservableField<String> nameSearch = new ObservableField<>("");
 
     @Inject
     public GetChooseUseCase getChooseUseCase;
@@ -27,6 +32,10 @@ public class AddSearchViewModel extends BaseViewModel {
                         String s = "asd";
                     }
                 });
+    }
+
+    public void setNameSearch(Editable s){
+        nameSearch.set(s.toString());
     }
 
 

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">АвтоТрейдер</string>
+    <string name="NameSearch">Название поиска</string>
+    <string name="MakeCar">Марка автомобиля</string>
+    <string name="ModelCar">Модель автомобиля</string>
+    <string name="year">Год выпуска</string>
 </resources>

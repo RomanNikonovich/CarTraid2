@@ -1,0 +1,29 @@
+apply plugin: 'com.android.library'
+apply plugin: 'realm-android'
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    def dependency = rootProject.ext.dependencies
+
+    implementation dependency.javaxInject
+    api dependency.jsoup
+    api dependency.retrofit2
+    api dependency.gson
+
+    api project(path: ':domain')
+}

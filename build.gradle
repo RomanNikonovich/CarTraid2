@@ -8,11 +8,46 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.0'
-        
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'io.realm:realm-gradle-plugin:5.0.0'
     }
+}
+ext {
+    compileSdkVersion = 27
+    minSdkVersion = 19
+    targetSdkVersion = 27
+
+    buildToolsSdkVersion = '27.0.3'
+    libraryVersion = '27.0.2'
+    rxjava2AndroidVerson = '2.0.2'
+    rxjava2Verson = '2.1.10'
+    archComponentVersion = '1.0.0'
+    daggerVersion = '2.15'
+    javaInjectVersion = '1'
+    jsoupVersion = '1.11.2'
+    retrofit2 = '2.4.0'
+    converterGsonVerson = '2.3.0'
+    gsonVerson = '2.8.0'
+    adapterRXVerson = '2.2.0'
+
+
+    dependencies = [
+            supportAppcompat       : "com.android.support:appcompat-v7:$libraryVersion",
+            supportDesign          : "com.android.support:design:$libraryVersion",
+            supportV4              : "com.android.support:support-v4:$libraryVersion",
+
+            adapterRX2             : "com.squareup.retrofit2:adapter-rxjava2:$adapterRXVerson",
+            gson                   : "com.google.code.gson:gson:$gsonVerson",
+            retrofit2              : "com.squareup.retrofit2:retrofit:$retrofit2",
+            converterGson          : "com.squareup.retrofit2:converter-gson:$converterGsonVerson",
+            rxjava2Android         : "io.reactivex.rxjava2:rxandroid:$rxjava2AndroidVerson",
+            rxjava2                : "io.reactivex.rxjava2:rxjava:$rxjava2Verson",
+            archComponentsExtention: "android.arch.lifecycle:extensions:$archComponentVersion",
+            archComponentsCompiler : "android.arch.lifecycle:compiler:$archComponentVersion",
+            dagger                 : "com.google.dagger:dagger:$daggerVersion",
+            daggerCompiler         : "com.google.dagger:dagger-compiler:$daggerVersion",
+            javaxInject            : "javax.inject:javax.inject:$javaInjectVersion",
+            jsoup                  : "org.jsoup:jsoup:$jsoupVersion"
+    ]
 }
 
 allprojects {

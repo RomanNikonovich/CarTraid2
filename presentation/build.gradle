@@ -1,0 +1,44 @@
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion = rootProject.buildToolsSdkVersion
+    defaultConfig {
+        applicationId "effexor.roman.nikonovich"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    def dependency = rootProject.ext.dependencies
+
+    implementation dependency.supportAppcompat
+    implementation dependency.supportDesign
+    implementation dependency.supportV4
+
+    implementation dependency.rxjava2Android
+    implementation dependency.archComponentsExtention
+    implementation dependency.dagger
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    annotationProcessor dependency.daggerCompiler
+    annotationProcessor dependency.archComponentsCompiler
+    implementation dependency.converterGson
+    implementation dependency.adapterRX2
+
+
+
+    api project(path: ':data')
+}

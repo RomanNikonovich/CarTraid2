@@ -48,6 +48,7 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
                         realm.beginTransaction();
                         realm.insert(list);
                         realm.commitTransaction();
+                        realm.close();
                     }
                 })
                 .ignoreElements();

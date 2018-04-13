@@ -18,9 +18,9 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:afterTextChanged="@{(s)->viewModel.setNameSearch(s)}"
             android:hint="@string/NameSearch"
-            android:textSize="20sp"
-            android:afterTextChanged="@{(s)->viewModel.setNameSearch(s)}"/>
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,8 +29,10 @@
             android:textSize="20sp" />
 
         <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinnerMake"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:spinnerMode="dialog" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -39,8 +41,10 @@
             android:textSize="20sp" />
 
         <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinnerModel"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:spinnerMode="dialog" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +71,10 @@
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_weight="100"
-                />
+                android:prompt="@string/ok" />
+
         </LinearLayout>
+
     </LinearLayout>
+
 </layout>

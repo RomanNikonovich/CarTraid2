@@ -4,4 +4,6 @@
     <string name="MakeCar">Марка автомобиля</string>
     <string name="ModelCar">Модель автомобиля</string>
     <string name="year">Год выпуска</string>
+    <string name="add_new_search">Добавить новый поиск тут</string>
+    <string name="ok">Ok</string>
 </resources>

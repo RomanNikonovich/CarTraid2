@@ -1,19 +1,33 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
+
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.0'
         classpath 'io.realm:realm-gradle-plugin:5.0.0'
+        classpath 'io.fabric.tools:gradle:1.+'
     }
 }
+/* типо метод для рассылки данных, qaToFabric - имя любое
+*releaseNotes - пометки для заказчика
+* AssembleRelease - это меняется в зависимости от версии какую хотим посылать заказчку*/
+/*task qaToFabric(dependsOn: "assembleRelease"){
+    def groupName = "qa_group"
+    def releaseNotes = ""
+    def task = tasks.getByName("crashlyticsUploadDistributionDevRelease")
+    task.ext.betaDistributionReleaseNotes = releaseNotes
+    task.ext.betaDistributionGroupAliases = groupName
+    task.execute()
+}*/
 ext {
     compileSdkVersion = 27
-    minSdkVersion = 21
+    minSdkVersion = 19
     targetSdkVersion = 27
 
     buildToolsSdkVersion = '27.0.3'
@@ -28,8 +42,8 @@ ext {
     converterGsonVerson = '2.3.0'
     gsonVerson = '2.8.0'
     adapterRXVerson = '2.2.0'
-
-
+    crashlyticsVersion = '2.9.1@aar'
+    constraintLVersion = '1.0.2'
     dependencies = [
             supportAppcompat       : "com.android.support:appcompat-v7:$libraryVersion",
             supportDesign          : "com.android.support:design:$libraryVersion",
@@ -46,7 +60,9 @@ ext {
             dagger                 : "com.google.dagger:dagger:$daggerVersion",
             daggerCompiler         : "com.google.dagger:dagger-compiler:$daggerVersion",
             javaxInject            : "javax.inject:javax.inject:$javaInjectVersion",
-            jsoup                  : "org.jsoup:jsoup:$jsoupVersion"
+            jsoup                  : "org.jsoup:jsoup:$jsoupVersion",
+            constraintL            : "com.android.support.constraint:constraint-layout:$constraintLVersion",
+
     ]
 }
 
@@ -54,6 +70,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
     }
 }
 

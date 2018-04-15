@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 apply plugin: 'realm-android'
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -11,8 +12,37 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        debug {
+            storeFile file('../DevHuckster.jks')
+            storePassword '1451413m'
+            keyAlias 'DevHucksterAl'
+            keyPassword '1451413m'
+        }
+       /*  release {
+             storeFile file('../DevHuckster.jks')
+             storePassword '12345678'
+             keyAlias 'TestAllias'
+             keyPassword '12345678'
+         }*/
+    }
+    productFlavors {
+        dev {
+            resValue "string", "app_name", "АвтоТрейдер"
+            flavorDimensions "default"
+            applicationId "effexor.roman.nikonovich"
+        }
+
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
+            signingConfig signingConfigs.debug
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -32,13 +62,13 @@ dependencies {
     implementation dependency.rxjava2Android
     implementation dependency.archComponentsExtention
     implementation dependency.dagger
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation dependency.constraintL
     annotationProcessor dependency.daggerCompiler
     annotationProcessor dependency.archComponentsCompiler
     implementation dependency.converterGson
     implementation dependency.adapterRX2
-
-
+    implementation ('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
+        transitive = true}
 
     api project(path: ':data')
 }

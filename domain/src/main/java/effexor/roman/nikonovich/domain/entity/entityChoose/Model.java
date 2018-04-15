@@ -1,7 +1,7 @@
 package effexor.roman.nikonovich.domain.entity.entityChoose;
 
 
-public class Model {
+public class Model implements Comparable<Model>{
     private String modelCar;
     private int idModel;
 
@@ -25,6 +25,7 @@ public class Model {
         return super.toString();
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,4 +44,8 @@ public class Model {
         return result;
     }
 
+    @Override
+    public int compareTo(Model model) {
+        return this.getModelCar().compareTo(model.getModelCar());
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -9,72 +10,122 @@
             type="effexor.roman.nikonovich.presentation.screens.formFilling.AddSearchViewModel" />
     </data>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:layout_margin="8dp">
 
         <EditText
+            android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:afterTextChanged="@{(s)->viewModel.setNameSearch(s)}"
             android:hint="@string/NameSearch"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/MakeCar"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinnerMake"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:spinnerMode="dialog" />
+            android:layout_marginTop="8dp"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/ModelCar"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerMake" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/spinnerModel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:spinnerMode="dialog" />
+            android:layout_marginTop="8dp"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="@string/year"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerModel" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinnerFrom"
+            android:layout_width="184dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:entries="@array/chooseYearFrom"
+            android:spinnerMode="dialog"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerTo"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/spinnerTo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <android.support.v7.widget.AppCompatSpinner
+            android:id="@+id/spinnerTo"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:entries="@array/chooseYearTo"
+            android:spinnerMode="dialog"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:onClick="@{()->viewModel.getUrl()}"
+            android:text="@string/new_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <android.support.v7.widget.AppCompatSpinner
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="100" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="3" />
-
-            <android.support.v7.widget.AppCompatSpinner
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="100"
-                android:prompt="@string/ok" />
-
-        </LinearLayout>
-
-    </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </layout>

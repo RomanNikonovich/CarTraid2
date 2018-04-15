@@ -12,11 +12,11 @@ import javax.inject.Inject;
 import effexor.roman.nikonovich.R;
 import effexor.roman.nikonovich.app.App;
 import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
-import effexor.roman.nikonovich.domain.entity.entityChoose.Model;
 import effexor.roman.nikonovich.domain.iterators.GetChooseUseCase;
 import effexor.roman.nikonovich.presentation.base.BaseViewModel;
 import effexor.roman.nikonovich.presentation.screens.formFilling.spinerAdapter.MakeAdapterSpinner;
 import effexor.roman.nikonovich.presentation.screens.formFilling.spinerAdapter.ModelAdapterSpinner;
+import effexor.roman.nikonovich.presentation.screens.formFilling.utils.SearchingURL;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 public class AddSearchViewModel extends BaseViewModel {
@@ -25,7 +25,10 @@ public class AddSearchViewModel extends BaseViewModel {
     public MakeAdapterSpinner spinMakeAdapter;
     public ModelAdapterSpinner spinModelAdapter;
     private List<MakeCar> makes = new ArrayList<>();
-    private List<Model> models = new ArrayList<>();
+    private String idMake = "";
+    private String idModel = "";
+    private String yearFrom = "";
+    private String yearTo = "";
 
     @Inject
     Context context;
@@ -36,7 +39,7 @@ public class AddSearchViewModel extends BaseViewModel {
     public AddSearchViewModel() {
         App.getAppComponent().inject(this);
         spinMakeAdapter = new MakeAdapterSpinner(context, R.layout.spiner_drop_down_item);
-        spinModelAdapter = new ModelAdapterSpinner(context, R.layout.spiner_drop_down_item, models);
+        spinModelAdapter = new ModelAdapterSpinner(context, R.layout.spiner_drop_down_item);
         compositeDisposable
                 .add(getChooseUseCase
                         .getChoose()
@@ -44,8 +47,7 @@ public class AddSearchViewModel extends BaseViewModel {
                             @Override
                             public void onNext(List<MakeCar> makeCars) {
                                 spinMakeAdapter.addAll(makeCars);
-                                models.addAll(makeCars.get(0).getModelsCars());
-                                spinModelAdapter.notifyDataSetChanged();
+                                spinMakeAdapter.notifyDataSetChanged();
                                 makes.addAll(makeCars);
                             }
 
@@ -60,15 +62,35 @@ public class AddSearchViewModel extends BaseViewModel {
                         }));
     }
 
+    public void setYearFrom(String yearFrom) {
+        this.yearFrom = yearFrom;
+    }
+
+    public void setYearTo(String yearTo) {
+        this.yearTo = yearTo;
+    }
 
     public void setNameSearch(Editable s) {
         nameSearch.set(s.toString());
     }
 
-    public void changeData(int position) {
+    public void setIdModel(String idModel) {
+        this.idModel = idModel;
+    }
 
-        models.addAll(makes.get(position).getModelsCars());
+    public void setIdMake(String idMake) {
+        this.idMake = idMake;
+    }
+
+    public void changeData(int position) {
+        spinModelAdapter.clear();
+        spinModelAdapter.addAll(makes.get(position).getModelsCars());
         spinModelAdapter.notifyDataSetChanged();
+    }
+
+
+    public void getUrl() {
+        String url = SearchingURL.getURL(idMake, idModel, yearFrom, yearTo);
     }
 
 }

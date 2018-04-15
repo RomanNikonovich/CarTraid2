@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import effexor.roman.nikonovich.data.entity.ParseError;
 import effexor.roman.nikonovich.data.entity.entityChooseNet.MakeCarNet;
+import effexor.roman.nikonovich.data.entity.entityChooseNet.ModelNet;
 import io.reactivex.Observable;
 
 @Singleton
@@ -24,6 +25,12 @@ public class RestService {
         return restAPI
                 .loadMakes()
                 .compose(errorTransformers.<List<MakeCarNet>, ParseError>parseHttpError());
+    }
+
+    public Observable<List<ModelNet>> loadModels(String id){
+        return restAPI
+                .loadModels(id)
+                .compose(errorTransformers.<List<ModelNet>, ParseError>parseHttpError());
     }
 
 }

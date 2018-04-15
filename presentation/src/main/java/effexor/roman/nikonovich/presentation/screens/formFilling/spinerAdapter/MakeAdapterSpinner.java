@@ -18,6 +18,7 @@ import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
 
 public class MakeAdapterSpinner extends ArrayAdapter<MakeCar> {
     private List<MakeCar> makeCars = new ArrayList<>();
+    private LayoutInflater flater;
 
     public MakeAdapterSpinner(@NonNull Context context, int resource) {
         super(context, resource);
@@ -42,12 +43,26 @@ public class MakeAdapterSpinner extends ArrayAdapter<MakeCar> {
     }
 
     private View getCustomView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View row = inflater.inflate(R.layout.spiner_drop_down_item, parent, false);
-        TextView makeCar = row.findViewById(R.id.textChoose);
-        TextView makeId = row.findViewById(R.id.textId);
-        makeCar.setText(makeCars.get(position).getMakeCar());
-        makeId.setText(String.valueOf(makeCars.get(position).getIdCar()));
-        return row;
+        ViewHolder viewHolder;
+        View rowView = convertView;
+        if(rowView == null){
+            viewHolder = new ViewHolder();
+            flater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = flater.inflate(R.layout.spiner_drop_down_item, parent, false);
+
+            viewHolder.titleSearch = rowView.findViewById(R.id.textChoose);
+            viewHolder.idSearch = rowView.findViewById(R.id.textId);
+            rowView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder)rowView.getTag();
+        }
+        viewHolder.titleSearch.setText(makeCars.get(position).getMakeCar());
+        viewHolder.idSearch.setText(String.valueOf(makeCars.get(position).getIdCar()));
+        return rowView;
+    }
+
+    private class ViewHolder {
+        TextView titleSearch;
+        TextView idSearch;
     }
 }

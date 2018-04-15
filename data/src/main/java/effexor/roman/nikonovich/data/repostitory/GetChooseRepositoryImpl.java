@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import effexor.roman.nikonovich.data.entity.entityChooseNet.MakeCarNet;
+import effexor.roman.nikonovich.data.entity.entityChooseNet.ModelNet;
 import effexor.roman.nikonovich.data.entity.entityChooseRealm.MakeCarRealm;
 import effexor.roman.nikonovich.data.restApi.RestService;
 import effexor.roman.nikonovich.data.utils.convertData.ConvertToDomainData;
@@ -23,6 +24,7 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
     private RestService restService;
     private Realm realm;
 
+    //FIXME - подумать обработку ошибок от реаль, может сюда запихнуть compose и удалить RestService
     @Inject
     public GetChooseRepositoryImpl(RestService restService) {
         this.restService = restService;
@@ -34,6 +36,22 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
 
         return restService
                 .loadMakes()
+                .doOnNext(new Consumer<List<MakeCarNet>>() {
+                    @Override
+                    public void accept(final List<MakeCarNet> makeCarNets) throws Exception {
+                        for(final MakeCarNet carNet: makeCarNets){
+                            restService
+                                    .loadModels(carNet.getObjectId())
+                                    .subscribe(new Consumer<List<ModelNet>>() {
+                                        @Override
+                                        public void accept(List<ModelNet> modelNets) throws Exception {
+                                            carNet.setModelsCars(modelNets);
+                                        }
+                                    });
+                        }
+
+                    }
+                })
                 .map(new Function<List<MakeCarNet>, List<MakeCarRealm>>() {
 
                     @Override

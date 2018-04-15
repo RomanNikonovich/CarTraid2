@@ -24,6 +24,9 @@
         <activity android:name=".presentation.screens.contactDeveloper.ContactDeveloper" />
         <activity android:name=".presentation.screens.aboutApp.AboutApp" />
         <activity android:name=".presentation.screens.searchCar.SearchCars"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="28e0d0e4b58ecefb98203ff0c96effbb222bb306" />
     </application>
 
 </manifest>

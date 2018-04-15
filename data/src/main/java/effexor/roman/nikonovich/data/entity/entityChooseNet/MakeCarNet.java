@@ -4,8 +4,17 @@ import java.util.List;
 
 public class MakeCarNet {
     private String makeCar;
+    private String objectId;
     private int idCar;
     private List<ModelNet> modelsCars;
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
     public String getMakeCar() {
         return makeCar;

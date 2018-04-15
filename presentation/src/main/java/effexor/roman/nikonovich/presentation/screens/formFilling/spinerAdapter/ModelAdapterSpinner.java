@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import effexor.roman.nikonovich.R;
@@ -17,10 +18,17 @@ import effexor.roman.nikonovich.domain.entity.entityChoose.Model;
 
 public class ModelAdapterSpinner extends ArrayAdapter<Model> {
     private List<Model> models = new ArrayList<>();
+    private LayoutInflater flater;
 
-    public ModelAdapterSpinner(@NonNull Context context, int resource, List<Model> models) {
-        super(context, resource, models);
-        this.models = models;
+    public ModelAdapterSpinner(@NonNull Context context, int resource) {
+        super(context, resource);
+    }
+
+    @Override
+    public void addAll(@NonNull Collection<? extends Model> collection) {
+        super.addAll(collection);
+        this.models.clear();
+        this.models.addAll(collection);
     }
 
     @Override
@@ -35,12 +43,26 @@ public class ModelAdapterSpinner extends ArrayAdapter<Model> {
     }
 
     private View getCustomView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View row = inflater.inflate(R.layout.spiner_drop_down_item, parent, false);
-        TextView makeCar = row.findViewById(R.id.textChoose);
-        TextView makeId = row.findViewById(R.id.textId);
-        makeCar.setText(models.get(position).getModelCar());
-        makeId.setText(String.valueOf(models.get(position).getIdModel()));
-        return row;
+        ViewHolder viewHolder;
+        View rowView = convertView;
+        if(rowView == null){
+            viewHolder = new ViewHolder();
+            flater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            rowView = flater.inflate(R.layout.spiner_drop_down_item, parent, false);
+
+            viewHolder.titleSearch = rowView.findViewById(R.id.textChoose);
+            viewHolder.idSearch = rowView.findViewById(R.id.textId);
+            rowView.setTag(viewHolder);
+        }else {
+            viewHolder = (ViewHolder)rowView.getTag();
+        }
+        viewHolder.titleSearch.setText(models.get(position).getModelCar());
+        viewHolder.idSearch.setText(String.valueOf(models.get(position).getIdModel()));
+        return rowView;
+    }
+
+    private class ViewHolder {
+        TextView titleSearch;
+        TextView idSearch;
     }
 }

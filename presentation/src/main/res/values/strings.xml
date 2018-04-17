@@ -6,5 +6,9 @@
     <string name="year">Год выпуска</string>
     <string name="add_new_search">Добавить новый поиск тут</string>
     <string name="ok">Ok</string>
+    <string name="setting">Изменить настройки тут</string>
+    <string name="result">Результаты поиска будут тут</string>
     <string name="new_search">Добавить новый поиск</string>
+    <string name="price">Цена:</string>
+    <string name="usd">USD</string>
 </resources>

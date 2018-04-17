@@ -15,8 +15,8 @@
         <item name="android:layout_marginTop">8dp</item>
     </style>
     <style name="styleBtnAdd">
-        <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">100dp</item>
+        <item name="android:layout_width">90dp</item>
+        <item name="android:layout_height">90dp</item>
         <item name="android:layout_alignParentEnd">true</item>
         <item name="android:background">@drawable/btn_add</item>
     </style>

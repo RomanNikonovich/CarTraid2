@@ -2,8 +2,8 @@ package effexor.roman.nikonovich.domain.repository;
 
 import java.util.List;
 
-import effexor.roman.nikonovich.domain.entity.vehicle.Car;
 import effexor.roman.nikonovich.domain.entity.vehicle.Search;
+import effexor.roman.nikonovich.domain.entity.vehicle.Vehicle;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
@@ -12,5 +12,5 @@ public interface SearchVehicleRepository {
 
     Flowable<List<Search>> getSearchList();
 
-    Flowable<List<Car>> getCars(String id);
+    Flowable<List<Vehicle>> getCars(String id);
 }

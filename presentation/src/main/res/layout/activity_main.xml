@@ -37,32 +37,134 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textHint"
+        <View
+            android:id="@+id/backgroundTips"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#7000"
-            android:gravity="center"
-            android:text="@{viewModel.userGide}"
-            android:textColor="#FFF"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:visibility="@{viewModel.isFirstRun ? V.VISIBLE : V.GONE}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <ImageView
+            android:id="@+id/newSearch"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/new_search"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/firstTip"
+            app:layout_constraintEnd_toEndOf="@+id/btnAddSearch"
+            app:layout_constraintTop_toBottomOf="@+id/btnAddSearch"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/firstTip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="156dp"
-            android:onClick="@{()->viewModel.userGide()}"
+            android:layout_marginStart="28dp"
+            android:text="@string/add_new_search"
+            android:textColor="#FFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.473" />
+
+        <Button
+            android:id="@+id/nextTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="showTips"
             android:text="@string/ok"
-            android:visibility="@{viewModel.isFirstRun ? V.VISIBLE : V.GONE}"
-            app:layout_constraintBottom_toBottomOf="@+id/textHint"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firstTip" />
+
+        <ImageView
+            android:id="@+id/setting"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/setting"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@+id/btnAddSearch"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/secondTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/setting"
+            android:textColor="#FFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/setting" />
+
+
+        <Button
+            android:id="@+id/nextTip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:onClick="showTips"
+            android:text="@string/ok"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/secondTip" />
+
+        <ImageView
+            android:id="@+id/showSearch"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:background="@drawable/result"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/thirdTip"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/thirdTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/result"
+            android:textColor="#FFF"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.737" />
+
+        <Button
+            android:id="@+id/nextTip3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:onClick="showTips"
+            android:text="@string/ok"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/thirdTip" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

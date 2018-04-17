@@ -2,35 +2,27 @@ package effexor.roman.nikonovich.presentation.screens.mainScreen;
 
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.databinding.ObservableBoolean;
-import android.databinding.ObservableField;
-import android.widget.Toast;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
-import effexor.roman.nikonovich.R;
 import effexor.roman.nikonovich.app.App;
-import effexor.roman.nikonovich.domain.iterators.LoadChooseUseCase;
+import effexor.roman.nikonovich.domain.entity.vehicle.Search;
+import effexor.roman.nikonovich.domain.iterators.GetSearchListUseCase;
+import effexor.roman.nikonovich.presentation.base.BaseAdapter;
 import effexor.roman.nikonovich.presentation.base.BaseViewModel;
 import effexor.roman.nikonovich.presentation.screens.formFilling.AddNewSearch;
-import io.reactivex.CompletableObserver;
-import io.reactivex.disposables.Disposable;
-
-import static android.content.Context.MODE_PRIVATE;
+import effexor.roman.nikonovich.presentation.screens.mainScreen.realiseRV.SearchAdapter;
+import effexor.roman.nikonovich.presentation.screens.searchCar.SearchCars;
+import io.reactivex.functions.Consumer;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 public class MainActViewModel extends BaseViewModel {
-
-    public final ObservableBoolean isFirstRun = new ObservableBoolean(false);
-    public final ObservableField<String> userGide = new ObservableField<>("Добавить новый поиск тут");
-    private String cheangeSettings = "Изменить настройки тут";
-    private String search = "Результаты поиска будут тут";
-    private int countGide = 0;
-
-    private SharedPreferences pref;
+    public SearchAdapter adapter = new SearchAdapter();
 
     @Inject
-    public LoadChooseUseCase loadChooseUseCase;
+    public GetSearchListUseCase searchListUseCase;
 
     public void addSearch() {
         router
@@ -40,69 +32,33 @@ public class MainActViewModel extends BaseViewModel {
 
     public MainActViewModel() {
         App.getAppComponent().inject(this);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        pref = router.getActivity().getSharedPreferences("first run", MODE_PRIVATE);
-        if (pref.getBoolean("first", true)) {
-            Toast.makeText(router.getActivity(), "first",
-                    Toast.LENGTH_LONG).show();
-            loadChoose();
-        }
-        pref
-                .edit()
-                .putBoolean("first", false)
-                .apply();
-    }
-
-    private void loadChoose() {
-        loadChooseUseCase
-                .loadChoose()
-                .subscribe(new CompletableObserver() {
+        compositeDisposable.add(searchListUseCase
+                .searchList()
+                .subscribeWith(new DisposableSubscriber<List<Search>>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
+                    public void onNext(List<Search> searches) {
+                        adapter.setItems(searches);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+
                     }
 
                     @Override
                     public void onComplete() {
-                        Toast.makeText(router.getActivity(), "loaded",
-                                Toast.LENGTH_LONG).show();
 
                     }
-
+                }));
+        compositeDisposable.add(adapter.observeClick()
+                .subscribe(new Consumer<BaseAdapter.ItemEntity>() {
                     @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(router.getActivity(), "Error",
-                                Toast.LENGTH_LONG).show();
+                    public void accept(BaseAdapter.ItemEntity itemEntity) throws Exception {
+                        Search search = (Search) itemEntity.model;
+                        Intent intent = new Intent(router.getActivity(), SearchCars.class);
+                        intent.putExtra("idSearch", search.getIdSearch());
+                        router.getActivity().startActivity(intent);
                     }
-                });
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        //FIXME add to complete
-        userGide();
-    }
-
-    public void userGide() {
-        if (countGide == 0) {
-            isFirstRun.set(true);
-            router.getActivity().findViewById(R.id.btnAddSearch).bringToFront();
-            countGide++;
-        } else if (countGide == 1) {
-            router.getActivity().findViewById(R.id.textHint).bringToFront();
-            userGide.set(cheangeSettings);
-            countGide++;
-        } else if (countGide == 2) {
-            userGide.set(search);
-            countGide++;
-        } else {
-            isFirstRun.set(false);
-        }
+                }));
     }
 }

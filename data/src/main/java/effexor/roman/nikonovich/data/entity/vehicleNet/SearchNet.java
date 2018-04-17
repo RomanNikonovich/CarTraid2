@@ -14,7 +14,7 @@ public class SearchNet extends RealmObject {
     private String idSearch = UUID.randomUUID().toString();
     private String nameSearch;
     private String urlSearch;
-    private RealmList<VehicleNet> listVehicleNet;
+    private RealmList<VehicleNet> listVehicleNet = new RealmList<>();
 
     public SearchNet() {
     }

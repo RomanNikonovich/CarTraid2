@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="effexor.roman.nikonovich.presentation.screens.mainScreen.realiseRV.SearchViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#90b16d"
+        android:layout_margin="8dp">
+
+        <TextView
+            android:id="@+id/nameSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:gravity=""
+            android:text="@{viewModel.nameSearch}"
+            android:textColor="#2d1010"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533"
+            tools:text="asdfsadfsadffdssadf" />
+
+        <TextView
+            android:id="@+id/idSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.idSearch}"
+            tools:text="asdfsadfsadffdssadf" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

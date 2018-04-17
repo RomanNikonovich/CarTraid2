@@ -1,4 +1,4 @@
-package effexor.roman.nikonovich.data.entity.entityChooseNet;
+package effexor.roman.nikonovich.data.entity.chooseNet;
 
 import java.util.List;
 

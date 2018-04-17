@@ -2,8 +2,8 @@ package effexor.roman.nikonovich.data.restApi;
 
 import java.util.List;
 
-import effexor.roman.nikonovich.data.entity.entityChooseNet.MakeCarNet;
-import effexor.roman.nikonovich.data.entity.entityChooseNet.ModelNet;
+import effexor.roman.nikonovich.data.entity.chooseNet.MakeCarNet;
+import effexor.roman.nikonovich.data.entity.chooseNet.ModelNet;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

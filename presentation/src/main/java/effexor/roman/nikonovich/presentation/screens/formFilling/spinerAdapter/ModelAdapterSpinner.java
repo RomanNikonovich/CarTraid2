@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 import effexor.roman.nikonovich.R;
-import effexor.roman.nikonovich.domain.entity.entityChoose.Model;
+import effexor.roman.nikonovich.domain.entity.choose.Model;
 
 public class ModelAdapterSpinner extends ArrayAdapter<Model> {
     private List<Model> models = new ArrayList<>();

@@ -1,8 +1,7 @@
-package effexor.roman.nikonovich.data.entity.entityChooseRealm;
+package effexor.roman.nikonovich.data.entity.chooseNet;
 
-import io.realm.RealmObject;
 
-public class ModelCarRealm extends RealmObject{
+public class ModelNet {
     private String modelCar;
     private int idModel;
 

@@ -1,4 +1,4 @@
-package effexor.roman.nikonovich.data.entity.entityChooseRealm;
+package effexor.roman.nikonovich.data.entity.chooseRealm;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;

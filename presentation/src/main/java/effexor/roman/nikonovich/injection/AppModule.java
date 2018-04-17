@@ -10,10 +10,12 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import effexor.roman.nikonovich.data.repostitory.GetChooseRepositoryImpl;
+import effexor.roman.nikonovich.data.repostitory.SearchVehicleRepositoryImpl;
 import effexor.roman.nikonovich.data.restApi.RestAPI;
 import effexor.roman.nikonovich.data.restApi.RestService;
 import effexor.roman.nikonovich.domain.executor.PostExecutionThread;
 import effexor.roman.nikonovich.domain.repository.GetChooseRepository;
+import effexor.roman.nikonovich.domain.repository.SearchVehicleRepository;
 import effexor.roman.nikonovich.executor.UIThread;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -33,6 +35,12 @@ public class AppModule {
     @Singleton
     public Context getContext() {
         return context;
+    }
+
+    @Provides
+    @Singleton
+    public SearchVehicleRepository getRepositoryVehicle() {
+        return new SearchVehicleRepositoryImpl();
     }
 
     @Provides

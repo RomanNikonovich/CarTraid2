@@ -6,8 +6,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import effexor.roman.nikonovich.data.entity.ParseError;
-import effexor.roman.nikonovich.data.entity.entityChooseNet.MakeCarNet;
-import effexor.roman.nikonovich.data.entity.entityChooseNet.ModelNet;
+import effexor.roman.nikonovich.data.entity.chooseNet.MakeCarNet;
+import effexor.roman.nikonovich.data.entity.chooseNet.ModelNet;
 import io.reactivex.Observable;
 
 @Singleton

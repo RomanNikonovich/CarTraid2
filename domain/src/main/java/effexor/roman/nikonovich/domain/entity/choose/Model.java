@@ -1,4 +1,4 @@
-package effexor.roman.nikonovich.domain.entity.entityChoose;
+package effexor.roman.nikonovich.domain.entity.choose;
 
 
 public class Model implements Comparable<Model>{

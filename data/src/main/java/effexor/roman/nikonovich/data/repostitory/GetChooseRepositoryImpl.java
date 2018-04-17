@@ -5,13 +5,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import effexor.roman.nikonovich.data.entity.entityChooseNet.MakeCarNet;
-import effexor.roman.nikonovich.data.entity.entityChooseNet.ModelNet;
-import effexor.roman.nikonovich.data.entity.entityChooseRealm.MakeCarRealm;
+import effexor.roman.nikonovich.data.entity.chooseNet.MakeCarNet;
+import effexor.roman.nikonovich.data.entity.chooseNet.ModelNet;
+import effexor.roman.nikonovich.data.entity.chooseRealm.MakeCarRealm;
 import effexor.roman.nikonovich.data.restApi.RestService;
 import effexor.roman.nikonovich.data.utils.convertData.ConvertToDomainData;
 import effexor.roman.nikonovich.data.utils.convertData.ConvertToRealm;
-import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
+import effexor.roman.nikonovich.domain.entity.choose.MakeCar;
 import effexor.roman.nikonovich.domain.repository.GetChooseRepository;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
@@ -84,6 +84,7 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
                 .map(new Function<RealmResults<MakeCarRealm>, List<MakeCar>>() {
                     @Override
                     public List<MakeCar> apply(RealmResults<MakeCarRealm> makeCarRealms) throws Exception {
+                        realm.close();
                         return ConvertToDomainData.convertList(makeCarRealms);
                     }
                 });

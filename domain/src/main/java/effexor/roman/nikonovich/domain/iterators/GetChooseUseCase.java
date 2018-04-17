@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
+import effexor.roman.nikonovich.domain.entity.choose.MakeCar;
 import effexor.roman.nikonovich.domain.executor.PostExecutionThread;
 import effexor.roman.nikonovich.domain.repository.GetChooseRepository;
 import io.reactivex.Flowable;

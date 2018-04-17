@@ -4,6 +4,7 @@ package effexor.roman.nikonovich.app;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+
 import effexor.roman.nikonovich.injection.AppComponent;
 import effexor.roman.nikonovich.injection.AppModule;
 import effexor.roman.nikonovich.injection.DaggerAppComponent;

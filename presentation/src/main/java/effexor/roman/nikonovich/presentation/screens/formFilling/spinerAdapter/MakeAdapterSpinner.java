@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 
 import effexor.roman.nikonovich.R;
-import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
+import effexor.roman.nikonovich.domain.entity.choose.MakeCar;
 
 public class MakeAdapterSpinner extends ArrayAdapter<MakeCar> {
     private List<MakeCar> makeCars = new ArrayList<>();

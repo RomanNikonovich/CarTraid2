@@ -3,10 +3,10 @@ package effexor.roman.nikonovich.data.utils.convertData;
 import java.util.ArrayList;
 import java.util.List;
 
-import effexor.roman.nikonovich.data.entity.entityChooseRealm.MakeCarRealm;
-import effexor.roman.nikonovich.data.entity.entityChooseRealm.ModelCarRealm;
-import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
-import effexor.roman.nikonovich.domain.entity.entityChoose.Model;
+import effexor.roman.nikonovich.data.entity.chooseRealm.MakeCarRealm;
+import effexor.roman.nikonovich.data.entity.chooseRealm.ModelCarRealm;
+import effexor.roman.nikonovich.domain.entity.choose.MakeCar;
+import effexor.roman.nikonovich.domain.entity.choose.Model;
 import io.realm.RealmList;
 
 public class ConvertToDomainData {

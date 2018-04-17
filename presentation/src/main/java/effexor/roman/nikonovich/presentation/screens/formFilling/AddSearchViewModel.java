@@ -11,12 +11,14 @@ import javax.inject.Inject;
 
 import effexor.roman.nikonovich.R;
 import effexor.roman.nikonovich.app.App;
-import effexor.roman.nikonovich.domain.entity.entityChoose.MakeCar;
+import effexor.roman.nikonovich.domain.entity.choose.MakeCar;
+import effexor.roman.nikonovich.domain.iterators.AddSearchUseCase;
 import effexor.roman.nikonovich.domain.iterators.GetChooseUseCase;
 import effexor.roman.nikonovich.presentation.base.BaseViewModel;
 import effexor.roman.nikonovich.presentation.screens.formFilling.spinerAdapter.MakeAdapterSpinner;
 import effexor.roman.nikonovich.presentation.screens.formFilling.spinerAdapter.ModelAdapterSpinner;
 import effexor.roman.nikonovich.presentation.screens.formFilling.utils.SearchingURL;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 
 public class AddSearchViewModel extends BaseViewModel {
@@ -32,7 +34,8 @@ public class AddSearchViewModel extends BaseViewModel {
 
     @Inject
     Context context;
-
+    @Inject
+    public AddSearchUseCase addSearchUseCase;
     @Inject
     public GetChooseUseCase getChooseUseCase;
 
@@ -91,6 +94,10 @@ public class AddSearchViewModel extends BaseViewModel {
 
     public void getUrl() {
         String url = SearchingURL.getURL(idMake, idModel, yearFrom, yearTo);
+        Disposable disposable = addSearchUseCase
+                .addSearch(url, nameSearch.get())
+                .subscribe();
+        compositeDisposable.add(disposable);
     }
 
 }

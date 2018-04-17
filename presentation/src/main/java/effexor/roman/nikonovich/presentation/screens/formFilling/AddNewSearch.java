@@ -49,14 +49,18 @@ public class AddNewSearch extends
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         switch (adapterView.getId()) {
             case R.id.spinnerMake:
-                TextView idMake = view.findViewById(R.id.textId);
-                viewModel.setIdMake(idMake.getText().toString());
-                viewModel.changeData(i);
-                binding.spinnerModel.setSelection(0);
+                if (view != null) {
+                    TextView idMake = view.findViewById(R.id.textId);
+                    viewModel.setIdMake(idMake.getText().toString());
+                    viewModel.changeData(i);
+                    binding.spinnerModel.setSelection(0);
+                }
                 break;
             case R.id.spinnerModel:
-                TextView idModel = view.findViewById(R.id.textId);
-                viewModel.setIdModel(idModel.getText().toString());
+                if (view != null) {
+                    TextView idModel = view.findViewById(R.id.textId);
+                    viewModel.setIdModel(idModel.getText().toString());
+                }
                 break;
             case R.id.spinnerFrom:
                 if (binding.spinnerFrom.getSelectedItem().toString()

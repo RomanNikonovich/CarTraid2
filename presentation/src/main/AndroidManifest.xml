@@ -19,8 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".presentation.screens.mainScreen.MainActivity"/>
-        <activity android:name=".presentation.screens.formFilling.AddNewSearch" />
+        <activity android:name=".presentation.screens.mainScreen.MainActivity" />
+        <activity
+            android:name=".presentation.screens.formFilling.AddNewSearch"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".presentation.screens.setting.Setting" />
         <activity android:name=".presentation.screens.contactDeveloper.ContactDeveloper" />
         <activity android:name=".presentation.screens.aboutApp.AboutApp" />

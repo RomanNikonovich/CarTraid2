@@ -14,14 +14,26 @@ public class SearchNet extends RealmObject {
     private String idSearch = UUID.randomUUID().toString();
     private String nameSearch;
     private String urlSearch;
+    private long dateCreate = System.currentTimeMillis();
+    private int price;
     private RealmList<VehicleNet> listVehicleNet = new RealmList<>();
 
     public SearchNet() {
     }
 
-    public SearchNet(String nameSearch, String urlSearch) {
+    public SearchNet(String nameSearch, String urlSearch, int price) {
         this.nameSearch = nameSearch;
         this.urlSearch = urlSearch;
+        this.price = price;
+
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public long getDateCreate() {
+        return dateCreate;
     }
 
     public RealmList<VehicleNet> getListVehicleNet() {

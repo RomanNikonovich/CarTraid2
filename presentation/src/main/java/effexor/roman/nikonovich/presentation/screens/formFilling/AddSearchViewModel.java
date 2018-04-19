@@ -1,7 +1,9 @@
 package effexor.roman.nikonovich.presentation.screens.formFilling;
 
 import android.content.Context;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
+import android.databinding.ObservableInt;
 import android.text.Editable;
 
 import java.util.ArrayList;
@@ -24,6 +26,8 @@ import io.reactivex.subscribers.DisposableSubscriber;
 public class AddSearchViewModel extends BaseViewModel {
 
     private ObservableField<String> nameSearch = new ObservableField<>("");
+    private ObservableInt price = new ObservableInt(0);
+    public final ObservableBoolean isFill = new ObservableBoolean(true);
     public MakeAdapterSpinner spinMakeAdapter;
     public ModelAdapterSpinner spinModelAdapter;
     private List<MakeCar> makes = new ArrayList<>();
@@ -77,6 +81,15 @@ public class AddSearchViewModel extends BaseViewModel {
         nameSearch.set(s.toString());
     }
 
+    public void setPriceSearch(Editable s) {
+        if (s.toString().equals("")) {
+            return;
+        } else {
+            price.set(Integer.valueOf(s.toString()));
+        }
+
+    }
+
     public void setIdModel(String idModel) {
         this.idModel = idModel;
     }
@@ -93,11 +106,17 @@ public class AddSearchViewModel extends BaseViewModel {
 
 
     public void getUrl() {
-        String url = SearchingURL.getURL(idMake, idModel, yearFrom, yearTo);
-        Disposable disposable = addSearchUseCase
-                .addSearch(url, nameSearch.get())
-                .subscribe();
-        compositeDisposable.add(disposable);
+        if (nameSearch.get().equals("") || price.get() == 0) {
+            isFill.set(false);
+            return;
+        } else {
+            String url = SearchingURL.getURL(idMake, idModel, yearFrom, yearTo);
+            Disposable disposable = addSearchUseCase
+                    .addSearch(url, nameSearch.get(), price.get())
+                    .subscribe();
+            compositeDisposable.add(disposable);
+        }
+
     }
 
 }

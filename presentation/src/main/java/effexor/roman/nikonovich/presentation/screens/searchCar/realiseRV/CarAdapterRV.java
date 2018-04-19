@@ -16,4 +16,5 @@ public class CarAdapterRV extends BaseAdapter<Vehicle, CarViewModelRV> {
     public BaseItemViewHolder<Vehicle, CarViewModelRV, ?> onCreateViewHolder(ViewGroup parent, int viewType) {
         return CarViewHolderRV.create(parent, new CarViewModelRV());
     }
+
 }

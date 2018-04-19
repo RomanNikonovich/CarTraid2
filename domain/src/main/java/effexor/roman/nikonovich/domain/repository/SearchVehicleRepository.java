@@ -8,7 +8,7 @@ import io.reactivex.Completable;
 import io.reactivex.Flowable;
 
 public interface SearchVehicleRepository {
-    Completable addSearch(String url, String nameSearch);
+    Completable addSearch(String url, String nameSearch, int price);
 
     Flowable<List<Search>> getSearchList();
 

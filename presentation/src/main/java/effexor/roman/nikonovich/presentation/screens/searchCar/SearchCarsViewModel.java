@@ -12,6 +12,7 @@ import effexor.roman.nikonovich.presentation.screens.searchCar.realiseRV.CarAdap
 import io.reactivex.subscribers.DisposableSubscriber;
 
 public class SearchCarsViewModel extends BaseViewModel {
+    private static final String ID_SEARCH = "idSearch";
 
     public CarAdapterRV adapterRV = new CarAdapterRV();
 
@@ -27,11 +28,10 @@ public class SearchCarsViewModel extends BaseViewModel {
     public void onStart() {
         super.onStart();
         compositeDisposable.add(carsUseCase
-                .getCars(router.getActivity().getIntent().getStringExtra("idSearch"))
+                .getCars(router.getActivity().getIntent().getStringExtra(ID_SEARCH))
                 .subscribeWith(new DisposableSubscriber<List<Vehicle>>() {
                     @Override
                     public void onNext(List<Vehicle> vehicles) {
-                        List<Vehicle> vehi  = vehicles;
                         adapterRV.setItems(vehicles);
                     }
 

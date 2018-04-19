@@ -1,16 +1,22 @@
 package effexor.roman.nikonovich.domain.entity.vehicle;
 
-public class Vehicle {
+public class Vehicle implements Comparable<Vehicle> {
     private String url;
     private String make;
     private String priceRUB;
-    private String priceUSD;
+    private int priceUSD;
+    private int priceLow;
 
-    public Vehicle(String url, String make, String priceRUB, String priceUSD) {
+    public Vehicle(String url, String make, String priceRUB, int priceUSD, int priceLow) {
         this.url = url;
         this.make = make;
         this.priceRUB = priceRUB;
         this.priceUSD = priceUSD;
+        this.priceLow = priceLow;
+    }
+
+    public int getPriceLow() {
+        return priceLow;
     }
 
     public String getUrl() {
@@ -25,9 +31,13 @@ public class Vehicle {
         return priceRUB;
     }
 
-    public String getPriceUSD() {
+    public int getPriceUSD() {
         return priceUSD;
     }
 
 
+    @Override
+    public int compareTo(Vehicle vehicle) {
+        return this.priceUSD - vehicle.priceUSD;
+    }
 }

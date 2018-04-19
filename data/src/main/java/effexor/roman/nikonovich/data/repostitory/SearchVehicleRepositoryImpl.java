@@ -16,7 +16,9 @@ import io.reactivex.Completable;
 import io.reactivex.CompletableEmitter;
 import io.reactivex.CompletableOnSubscribe;
 import io.reactivex.Flowable;
+import io.reactivex.functions.Action;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
 import io.realm.Realm;
 import io.realm.RealmList;
 import io.realm.RealmObject;
@@ -24,41 +26,45 @@ import io.realm.RealmResults;
 
 public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
     private Realm realm;
+    private static final String ID_SEARCH = "idSearch";
 
     @Inject
     public SearchVehicleRepositoryImpl() {
     }
 
     @Override
-    public Completable addSearch(final String url, final String nameSearch) {
+    public Completable addSearch(final String url, final String nameSearch, final int price) {
 
         return Completable.create(new CompletableOnSubscribe() {
             @Override
             public void subscribe(CompletableEmitter emitter) throws Exception {
-                final SearchNet searchNet = new SearchNet(nameSearch, url);
-                realm = Realm.getDefaultInstance();
-                realm.beginTransaction();
-                realm.insert(searchNet);
-                realm.commitTransaction();
-                realm.close();
-                realm = Realm.getDefaultInstance();
-                realm.executeTransactionAsync(new Realm.Transaction() {
-                    @Override
-                    public void execute(Realm realm) {
-                        try {
-                            RealmList<VehicleNet> carsList = ParseUrl.getCars(url);
-                            SearchNet search = realm
-                                    .where(SearchNet.class)
-                                    .equalTo("idSearch", searchNet.getIdSearch())
-                                    .findFirst();
-                            search.setListVehicleNet(carsList);
-                            search.setNameSearch("Sucses");
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                final SearchNet searchNet = new SearchNet(nameSearch, url, price);
+                try (Realm realmInstance = Realm.getDefaultInstance()) {
+                    realmInstance.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.insert(searchNet);
                         }
+                    });
+                }
+                try (Realm realmInstance = Realm.getDefaultInstance()) {
+                    realmInstance.executeTransactionAsync(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            try {
+                                RealmList<VehicleNet> carsList = ParseUrl.getCars(url);
+                                SearchNet search = realm
+                                        .where(SearchNet.class)
+                                        .equalTo(ID_SEARCH, searchNet.getIdSearch())
+                                        .findFirst();
+                                search.getListVehicleNet().addAll(carsList);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
-                    }
-                });
+                        }
+                    });
+                }
                 emitter.onComplete();
             }
         });
@@ -76,11 +82,18 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
                     public List<Search> apply(RealmResults<SearchNet> searchNets) throws Exception {
                         List<Search> list = new ArrayList<>();
                         for (SearchNet search : searchNets) {
-                            list.add(new Search(search.getIdSearch(), search.getNameSearch()));
+                            list.add(new Search(search.getIdSearch(), search.getNameSearch(), search.getDateCreate()));
                         }
                         return list;
                     }
+                })
+                .doOnComplete(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        realm.close();
+                    }
                 });
+
     }
 
     @Override
@@ -88,16 +101,25 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
         realm = Realm.getDefaultInstance();
         return realm
                 .where(SearchNet.class)
-                .equalTo("idSearch", id)
-                .findFirstAsync()
+                .equalTo(ID_SEARCH, id)
+                .findFirst()
                 .asFlowable()
+                .filter(new Predicate<RealmObject>() {
+                    @Override
+                    public boolean test(RealmObject realmObject) throws Exception {
+                        return realmObject.isLoaded();
+                    }
+                })
                 .map(new Function<RealmObject, List<Vehicle>>() {
                     @Override
                     public List<Vehicle> apply(RealmObject realmObject) throws Exception {
-                        SearchNet search = (SearchNet) realmObject;
                         List<Vehicle> vehicles = new ArrayList<>();
-                        for (effexor.roman.nikonovich.data.entity.vehicleNet.VehicleNet vehicle : search.getListVehicleNet()) {
-                            vehicles.add(new Vehicle(vehicle.getUrl(), vehicle.getMake(), vehicle.getPriceRUB(), vehicle.getPriceUSD()));
+                        for (VehicleNet vehicle : ((SearchNet) realmObject).getListVehicleNet()) {
+                            vehicles.add(new Vehicle(vehicle.getUrl(),
+                                    vehicle.getMake(),
+                                    vehicle.getPriceRUB(),
+                                    vehicle.getPriceUSD(),
+                                    ((SearchNet) realmObject).getPrice()));
                         }
                         return vehicles;
                     }

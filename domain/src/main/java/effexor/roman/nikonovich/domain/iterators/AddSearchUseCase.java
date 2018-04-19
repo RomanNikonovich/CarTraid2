@@ -15,9 +15,9 @@ public class AddSearchUseCase extends BaseUseCase {
         this.repository = repository;
     }
 
-    public Completable addSearch(String url, String nameSearch){
+    public Completable addSearch(String url, String nameSearch, int price){
         return repository
-                .addSearch(url, nameSearch)
+                .addSearch(url, nameSearch, price)
                 .subscribeOn(threadExecution)
                 .observeOn(postExecutionThread);
     }

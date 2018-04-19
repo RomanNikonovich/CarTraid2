@@ -12,12 +12,12 @@ public class VehicleNet extends RealmObject {
     private String url;
     private String make;
     private String priceRUB;
-    private String priceUSD;
+    private int priceUSD;
 
     public VehicleNet() {
     }
 
-    public VehicleNet(String url, String make, String priceRUB, String priceUSD) {
+    public VehicleNet(String url, String make, String priceRUB, int priceUSD) {
         this.url = url;
         this.make = make;
         this.priceRUB = priceRUB;
@@ -44,11 +44,11 @@ public class VehicleNet extends RealmObject {
         this.priceRUB = priceRUB;
     }
 
-    public String getPriceUSD() {
+    public int getPriceUSD() {
         return priceUSD;
     }
 
-    public void setPriceUSD(String priceUSD) {
+    public void setPriceUSD(int priceUSD) {
         this.priceUSD = priceUSD;
     }
 

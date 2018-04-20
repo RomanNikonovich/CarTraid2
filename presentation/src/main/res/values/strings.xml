@@ -9,7 +9,7 @@
     <string name="setting">Изменить настройки тут</string>
     <string name="result">Результаты поиска будут тут</string>
     <string name="new_search">Добавить новый поиск</string>
-    <string name="want_price">Желаемая цена в USD</string>
+    <string name="want_price">Максимальная цена <b>(в USD)</b></string>
     <string name="warning">Обязательно для заполнения</string>
     <string name="price">Цена:</string>
     <string name="usd">USD</string>

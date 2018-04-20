@@ -19,7 +19,12 @@ public class CarViewModelRV extends BaseItemViewModel<Vehicle> {
         make.set(vehicle.getMake());
         priceRUB.set(vehicle.getPriceRUB());
         priceUSD.set(vehicle.getPriceUSD());
-        if(vehicle.getPriceUSD() <= vehicle.getPriceLow())
+        if(vehicle.getPriceUSD() <= vehicle.getPriceLow()){
             isLow.set(true);
+        }else{
+            isLow.set(false);
+        }
+
+
     }
 }

@@ -115,6 +115,7 @@ public class AddSearchViewModel extends BaseViewModel {
                     .addSearch(url, nameSearch.get(), price.get())
                     .subscribe();
             compositeDisposable.add(disposable);
+            router.back();
         }
 
     }

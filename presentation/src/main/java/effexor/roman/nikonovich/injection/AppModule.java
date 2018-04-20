@@ -24,7 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class AppModule {
 
-    private static final String BASE_URL = "https://api.backendless.com/BF19A022-69A2-3ED3-FFD7-F67EA8461100/98E8FC21-EF0E-72F6-FF48-A89A5B17B600/";
+    private static final String BASE_URL = "https://firebasestorage.googleapis.com/v0/b/huckster-9dc11.appspot.com/o/";
     Context context;
 
     public AppModule(Context context) {

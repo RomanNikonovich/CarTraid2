@@ -13,4 +13,7 @@ public abstract class BaseRouter {
     public Activity getActivity() {
         return activity;
     }
+
+    public void back() {
+    }
 }

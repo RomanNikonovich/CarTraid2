@@ -8,4 +8,9 @@ class NewSearchRouter extends BaseRouter {
     NewSearchRouter(Activity activity) {
         super(activity);
     }
+
+    @Override
+    public void back() {
+        this.getActivity().onBackPressed();
+    }
 }

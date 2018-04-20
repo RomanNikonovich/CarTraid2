@@ -6,7 +6,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import effexor.roman.nikonovich.data.entity.chooseNet.MakeCarNet;
-import effexor.roman.nikonovich.data.entity.chooseNet.ModelNet;
 import effexor.roman.nikonovich.data.entity.chooseRealm.MakeCarRealm;
 import effexor.roman.nikonovich.data.restApi.RestService;
 import effexor.roman.nikonovich.data.utils.convertData.ConvertToDomainData;
@@ -36,22 +35,6 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
 
         return restService
                 .loadMakes()
-                .doOnNext(new Consumer<List<MakeCarNet>>() {
-                    @Override
-                    public void accept(final List<MakeCarNet> makeCarNets) throws Exception {
-                        for(final MakeCarNet carNet: makeCarNets){
-                            restService
-                                    .loadModels(carNet.getObjectId())
-                                    .subscribe(new Consumer<List<ModelNet>>() {
-                                        @Override
-                                        public void accept(List<ModelNet> modelNets) throws Exception {
-                                            carNet.setModelsCars(modelNets);
-                                        }
-                                    });
-                        }
-
-                    }
-                })
                 .map(new Function<List<MakeCarNet>, List<MakeCarRealm>>() {
 
                     @Override

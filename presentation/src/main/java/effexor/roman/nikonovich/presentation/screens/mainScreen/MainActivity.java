@@ -1,6 +1,8 @@
 package effexor.roman.nikonovich.presentation.screens.mainScreen;
 
+import android.app.NotificationManager;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,9 +16,12 @@ import effexor.roman.nikonovich.data.sharedPref.AppSharedPrefs;
 import effexor.roman.nikonovich.databinding.ActivityMainBinding;
 import effexor.roman.nikonovich.presentation.base.BaseActivity;
 
+import static effexor.roman.nikonovich.data.utils.CheckDataIntentService.NOTIFICATION_ID;
+
 public class MainActivity extends
         BaseActivity<ActivityMainBinding, MainActViewModel, MainActRouter> {
     private int countGide = 0;
+    private NotificationManager notificationManager;
     @Inject
     public AppSharedPrefs sharedPrefs;
 
@@ -39,20 +44,20 @@ public class MainActivity extends
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.getAppComponent().inject(this);
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NOTIFICATION_ID);
+
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setAdapter(viewModel.adapter);
 
         if (sharedPrefs.getTipsShow())
             showTips(null);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        countGide = 0;
-        showTips(null);
-    }
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+}
+
 
     public void showTips(View view) {
         if (countGide == 0) {
@@ -73,7 +78,7 @@ public class MainActivity extends
             binding.secondTip.bringToFront();
             binding.nextTip2.setVisibility(View.VISIBLE);
             countGide++;
-        } else if(countGide == 2){
+        } else if (countGide == 2) {
             binding.setting.setVisibility(View.GONE);
             binding.secondTip.setVisibility(View.GONE);
             binding.nextTip2.setVisibility(View.GONE);
@@ -83,13 +88,12 @@ public class MainActivity extends
             binding.thirdTip.bringToFront();
             binding.nextTip3.setVisibility(View.VISIBLE);
             countGide++;
-        }else {
+        } else {
             binding.backgroundTips.setVisibility(View.GONE);
             binding.showSearch.setVisibility(View.GONE);
             binding.thirdTip.setVisibility(View.GONE);
             binding.nextTip3.setVisibility(View.GONE);
             sharedPrefs.saveTipsShow();
         }
-
     }
 }

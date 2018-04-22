@@ -6,13 +6,23 @@ public class Vehicle implements Comparable<Vehicle> {
     private String priceRUB;
     private int priceUSD;
     private int priceLow;
+    private boolean isNew;
 
-    public Vehicle(String url, String make, String priceRUB, int priceUSD, int priceLow) {
+    public Vehicle(String url, String make, String priceRUB, int priceUSD, int priceLow, boolean isNew) {
         this.url = url;
         this.make = make;
         this.priceRUB = priceRUB;
         this.priceUSD = priceUSD;
         this.priceLow = priceLow;
+        this.isNew = isNew;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
     }
 
     public int getPriceLow() {

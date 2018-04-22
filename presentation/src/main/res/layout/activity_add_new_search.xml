@@ -9,18 +9,33 @@
             name="viewModel"
             type="effexor.roman.nikonovich.presentation.screens.formFilling.AddSearchViewModel" />
     </data>
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp">
+        >
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/toolbarView"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/name_app" />
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
 
         <EditText
             android:id="@+id/editText2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_marginTop="68dp"
             android:afterTextChanged="@{(s)->viewModel.setNameSearch(s)}"
             android:hint="@{viewModel.isFill ? @string/NameSearch : @string/warning}"
             android:textColorHint="@{viewModel.isFill ? @color/firstHint : @color/secondHint}"
@@ -149,5 +164,5 @@
             app:layout_constraintTop_toBottomOf="@+id/textView4"
             app:layout_constraintVertical_bias="1.0" />
     </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 </layout>

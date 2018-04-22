@@ -43,6 +43,9 @@ public class AddNewSearch extends
         binding.spinnerFrom.setOnItemSelectedListener(this);
         binding.spinnerTo.setOnItemSelectedListener(this);
 
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
     }
 
     @Override

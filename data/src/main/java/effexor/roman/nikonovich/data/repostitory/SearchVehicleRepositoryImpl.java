@@ -1,5 +1,7 @@
 package effexor.roman.nikonovich.data.repostitory;
 
+import android.content.Context;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +29,11 @@ import io.realm.RealmResults;
 public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
     private Realm realm;
     private static final String ID_SEARCH = "idSearch";
+    private Context context;
 
     @Inject
-    public SearchVehicleRepositoryImpl() {
+    public SearchVehicleRepositoryImpl(Context context) {
+        this.context = context;
     }
 
     @Override
@@ -38,28 +42,22 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
         return Completable.create(new CompletableOnSubscribe() {
             @Override
             public void subscribe(CompletableEmitter emitter) throws Exception {
-                final SearchNet searchNet = new SearchNet(nameSearch, url, price);
-                try (Realm realmInstance = Realm.getDefaultInstance()) {
-                    realmInstance.executeTransaction(new Realm.Transaction() {
-                        @Override
-                        public void execute(Realm realm) {
-                            realm.insert(searchNet);
-                        }
-                    });
-                }
+
                 try (Realm realmInstance = Realm.getDefaultInstance()) {
                     realmInstance.executeTransactionAsync(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
+                            final SearchNet searchNet = new SearchNet(nameSearch, url, price);
                             try {
                                 RealmList<VehicleNet> carsList = ParseUrl.getCars(url);
+                                realm.insert(searchNet);
                                 SearchNet search = realm
                                         .where(SearchNet.class)
                                         .equalTo(ID_SEARCH, searchNet.getIdSearch())
                                         .findFirst();
                                 search.getListVehicleNet().addAll(carsList);
                             } catch (IOException e) {
-                                e.printStackTrace();
+                                realm.insert(searchNet);
                             }
 
                         }
@@ -119,7 +117,8 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
                                     vehicle.getMake(),
                                     vehicle.getPriceRUB(),
                                     vehicle.getPriceUSD(),
-                                    ((SearchNet) realmObject).getPrice()));
+                                    ((SearchNet) realmObject).getPrice(),
+                                    vehicle.isNew()));
                         }
                         return vehicles;
                     }

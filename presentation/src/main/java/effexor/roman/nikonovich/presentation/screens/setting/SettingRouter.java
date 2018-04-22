@@ -9,4 +9,9 @@ class SettingRouter extends BaseRouter {
     SettingRouter(Activity activity) {
         super(activity);
     }
+
+    @Override
+    public void back() {
+        this.getActivity().onBackPressed();
+    }
 }

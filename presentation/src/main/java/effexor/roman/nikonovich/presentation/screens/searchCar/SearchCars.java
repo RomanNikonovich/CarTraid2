@@ -33,5 +33,8 @@ public class SearchCars extends
         binding.carsRV.setLayoutManager(new LinearLayoutManager(this));
         binding.carsRV.setHasFixedSize(true);
         binding.carsRV.setAdapter(viewModel.adapterRV);
+
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 }

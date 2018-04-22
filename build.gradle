@@ -27,7 +27,7 @@ task qaToFabric(dependsOn: "assembleRelease"){
 }
 ext {
     compileSdkVersion = 27
-    minSdkVersion = 19
+    minSdkVersion = 21
     targetSdkVersion = 27
 
     buildToolsSdkVersion = '27.0.3'

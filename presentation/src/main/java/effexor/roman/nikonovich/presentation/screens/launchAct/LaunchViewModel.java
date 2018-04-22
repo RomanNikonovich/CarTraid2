@@ -67,7 +67,6 @@ public class LaunchViewModel extends BaseViewModel {
     }
     private void runAct(){
         Intent runMainAct = new Intent(router.getActivity(), MainActivity.class);
-        runMainAct.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         router
                 .getActivity()
                 .startActivity(runMainAct);

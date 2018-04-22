@@ -39,8 +39,8 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public SearchVehicleRepository getRepositoryVehicle() {
-        return new SearchVehicleRepositoryImpl();
+    public SearchVehicleRepository getRepositoryVehicle(Context context) {
+        return new SearchVehicleRepositoryImpl(context);
     }
 
     @Provides

@@ -13,6 +13,19 @@ public class VehicleNet extends RealmObject {
     private String make;
     private String priceRUB;
     private int priceUSD;
+    private boolean isNew = false;
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public boolean isNew() {
+        return isNew;
+    }
 
     public VehicleNet() {
     }
@@ -55,7 +68,6 @@ public class VehicleNet extends RealmObject {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
         VehicleNet that = (VehicleNet) o;
         return Objects.equals(url, that.url);
     }
@@ -65,5 +77,4 @@ public class VehicleNet extends RealmObject {
 
         return Objects.hash(url);
     }
-
 }

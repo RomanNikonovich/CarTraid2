@@ -3,6 +3,8 @@
     package="effexor.roman.nikonovich">
 
     <uses-permission android:name="android.permission.INTERNET" />
+   <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".app.App"
@@ -12,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentation.screens.launchAct.LaunchAct">
+        <activity
+            android:name=".presentation.screens.launchAct.LaunchAct"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,6 +35,19 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="28e0d0e4b58ecefb98203ff0c96effbb222bb306" />
+        <service android:name=".data.utils.CheckDataIntentService" />
+    <!--    <receiver android:name=".presentation.utils.CheckInternetBroadcast" android:enabled="true">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>-->
+        <service
+            android:name=".presentation.utils.CheckCarsJobService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            >
+        </service>
     </application>
 
 </manifest>

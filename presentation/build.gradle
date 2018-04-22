@@ -55,7 +55,6 @@ android {
 dependencies {
     def dependency = rootProject.ext.dependencies
 
-    implementation dependency.supportAppcompat
     implementation dependency.supportDesign
     implementation dependency.supportV4
 

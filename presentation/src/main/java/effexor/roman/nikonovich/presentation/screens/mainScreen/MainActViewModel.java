@@ -20,14 +20,20 @@ import io.reactivex.subscribers.DisposableSubscriber;
 
 public class MainActViewModel extends BaseViewModel {
     public SearchAdapter adapter = new SearchAdapter();
+    public static final String ID_SEARCH = "idSearch";
+/*    private CheckInternetBroadcast broadcast;*/
 
     @Inject
     public GetSearchListUseCase searchListUseCase;
 
     public void addSearch() {
+/*        broadcast = new CheckInternetBroadcast();
+        router.getActivity().registerReceiver(broadcast, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));*/
         router
                 .getActivity()
                 .startActivity(new Intent(router.getActivity(), AddNewSearch.class));
+
+
     }
 
     public MainActViewModel() {
@@ -56,9 +62,10 @@ public class MainActViewModel extends BaseViewModel {
                     public void accept(BaseAdapter.ItemEntity itemEntity) throws Exception {
                         Search search = (Search) itemEntity.model;
                         Intent intent = new Intent(router.getActivity(), SearchCars.class);
-                        intent.putExtra("idSearch", search.getIdSearch());
+                        intent.putExtra(ID_SEARCH, search.getIdSearch());
                         router.getActivity().startActivity(intent);
                     }
                 }));
     }
+
 }

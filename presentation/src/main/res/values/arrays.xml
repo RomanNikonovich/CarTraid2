@@ -108,4 +108,15 @@
         <item>1969</item>
         <item>1968</item>
     </string-array>
+    <string-array name="schedule_number">
+        <item>Никогда</item>
+        <item>10 мин.</item>
+        <item>20 мин.</item>
+        <item>40 мин.</item>
+        <item>1 час</item>
+        <item>2 часа</item>
+        <item>6 часов</item>
+        <item>12 часов</item>
+        <item>24 часа</item>
+    </string-array>
 </resources>

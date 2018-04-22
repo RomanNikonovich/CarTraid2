@@ -23,6 +23,7 @@ dependencies {
     api dependency.jsoup
     api dependency.retrofit2
     api dependency.gson
+    api dependency.supportAppcompat
 
     api project(path: ':domain')
 }

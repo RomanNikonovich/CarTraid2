@@ -77,7 +77,7 @@ public class LaunchViewModel extends BaseViewModel {
 
     private String getError(Throwable e) {
         String infoError;
-        if (e instanceof Error) {
+        if (e instanceof ParseError) {
             ParseError myError = (ParseError) e;
             if (myError.getClearError() == ErrorType.NO_INTERNET) {
                 infoError = "Проверьте соединение с интернетом";

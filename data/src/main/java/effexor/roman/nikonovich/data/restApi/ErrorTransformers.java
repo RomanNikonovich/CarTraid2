@@ -30,7 +30,6 @@ public class ErrorTransformers {
                         if (throwable instanceof SocketTimeoutException) {
                             return Observable.error(new ParseError(ErrorType.SERVER_NOT_AVAILABLE));
                         } else if (throwable instanceof IOException) {
-                            //можно обернуть ещё раз в compose и сделать ещё пару попыток соединения с интернетом
                             return Observable.error(new ParseError(ErrorType.NO_INTERNET));
                         } else {
                             return Observable.error(new ParseError(ErrorType.UNKNOWN));

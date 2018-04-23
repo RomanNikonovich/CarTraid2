@@ -35,7 +35,7 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="28e0d0e4b58ecefb98203ff0c96effbb222bb306" />
-        <service android:name=".data.utils.CheckDataIntentService" />
+        <service android:name=".presentation.utils.CheckDataIntentService" />
     <!--    <receiver android:name=".presentation.utils.CheckInternetBroadcast" android:enabled="true">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>

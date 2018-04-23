@@ -13,7 +13,7 @@
     <string name="warning">Обязательно для заполнения</string>
     <string name="price">Цена:</string>
     <string name="usd">USD</string>
-    <string name="new_car">New</string>
+    <string name="new_car">NEW</string>
     <string name="setting_tool_bar">Настройки</string>
     <string name="link">Связаться с разработчиком</string>
     <string name="about_app">О программе</string>
@@ -21,4 +21,6 @@
     <string name="new_car_search">Присылать оповещения при появлении новых авто</string>
     <string name="sound">Звуковой сигнал при оповещении</string>
     <string name="save_setting">Сохранить настройки</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
 </resources>

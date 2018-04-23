@@ -44,10 +44,6 @@ public class SearchNet extends RealmObject {
         this.listVehicleNet = listVehicleNet;
     }
 
-    public void setIdSearch(String idSearch) {
-        this.idSearch = idSearch;
-    }
-
     public String getUrlSearch() {
         return urlSearch;
     }

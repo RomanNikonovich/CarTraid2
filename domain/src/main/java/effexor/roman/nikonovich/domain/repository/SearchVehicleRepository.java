@@ -10,7 +10,10 @@ import io.reactivex.Flowable;
 public interface SearchVehicleRepository {
     Completable addSearch(String url, String nameSearch, int price);
 
+    Completable deleteSearch(String id);
+
     Flowable<List<Search>> getSearchList();
 
     Flowable<List<Vehicle>> getCars(String id);
+
 }

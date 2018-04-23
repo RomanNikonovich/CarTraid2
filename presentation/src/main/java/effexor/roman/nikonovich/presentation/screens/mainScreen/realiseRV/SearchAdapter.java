@@ -10,6 +10,7 @@ public class SearchAdapter extends BaseAdapter<Search, SearchViewModel> {
 
     public SearchAdapter() {
         isClickable = true;
+        isClickableLong = true;
     }
 
     @Override

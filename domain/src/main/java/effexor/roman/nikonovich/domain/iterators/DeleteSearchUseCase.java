@@ -6,19 +6,20 @@ import effexor.roman.nikonovich.domain.executor.PostExecutionThread;
 import effexor.roman.nikonovich.domain.repository.SearchVehicleRepository;
 import io.reactivex.Completable;
 
-public class AddSearchUseCase extends BaseUseCase {
+public class DeleteSearchUseCase extends BaseUseCase {
     private SearchVehicleRepository repository;
 
     @Inject
-    public AddSearchUseCase(PostExecutionThread postExecutionThread, SearchVehicleRepository repository) {
+    public DeleteSearchUseCase(PostExecutionThread postExecutionThread, SearchVehicleRepository repository) {
         super(postExecutionThread);
         this.repository = repository;
     }
 
-    public Completable addSearch(String url, String nameSearch, int price) {
+    public Completable deleteSearch(String id){
         return repository
-                .addSearch(url, nameSearch, price)
-                .subscribeOn(threadExecution)
+                .deleteSearch(id)
                 .observeOn(postExecutionThread);
     }
+
+
 }

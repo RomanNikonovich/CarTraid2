@@ -13,8 +13,10 @@ public abstract class BaseAdapter<Model, ViewModel extends BaseItemViewModel<Mod
 
     private List<Model> items = new ArrayList<>();
     protected boolean isClickable = false;
+    protected boolean isClickableLong = false;
 
     private PublishSubject<ItemEntity> clickSubject = PublishSubject.create();
+    private PublishSubject<ItemEntity> clickSubjectLong = PublishSubject.create();
 
 
     public void setItems(List<Model> items) {
@@ -25,6 +27,10 @@ public abstract class BaseAdapter<Model, ViewModel extends BaseItemViewModel<Mod
 
     public PublishSubject<ItemEntity> observeClick() {
         return clickSubject;
+    }
+
+    public PublishSubject<ItemEntity> observeClickLong() {
+        return clickSubjectLong;
     }
 
     @Override
@@ -62,11 +68,23 @@ public abstract class BaseAdapter<Model, ViewModel extends BaseItemViewModel<Mod
                 }
             });
         }
+        if (isClickableLong) {
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    int position = holder.getAdapterPosition();
+                    clickSubjectLong.onNext(new ItemEntity(items.get(position), position));
+                    return false;
+                }
+            });
+        }
+
     }
 
     @Override
     public void onViewDetachedFromWindow(BaseItemViewHolder<Model, ViewModel, ?> holder) {
         super.onViewDetachedFromWindow(holder);
         holder.itemView.setOnClickListener(null);
+        holder.itemView.setOnLongClickListener(null);
     }
 }

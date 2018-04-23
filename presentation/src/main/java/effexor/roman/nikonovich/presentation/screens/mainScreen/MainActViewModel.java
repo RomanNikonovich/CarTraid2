@@ -1,14 +1,18 @@
 package effexor.roman.nikonovich.presentation.screens.mainScreen;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import effexor.roman.nikonovich.R;
 import effexor.roman.nikonovich.app.App;
 import effexor.roman.nikonovich.domain.entity.vehicle.Search;
+import effexor.roman.nikonovich.domain.iterators.DeleteSearchUseCase;
 import effexor.roman.nikonovich.domain.iterators.GetSearchListUseCase;
 import effexor.roman.nikonovich.presentation.base.BaseAdapter;
 import effexor.roman.nikonovich.presentation.base.BaseViewModel;
@@ -21,19 +25,18 @@ import io.reactivex.subscribers.DisposableSubscriber;
 public class MainActViewModel extends BaseViewModel {
     public SearchAdapter adapter = new SearchAdapter();
     public static final String ID_SEARCH = "idSearch";
-/*    private CheckInternetBroadcast broadcast;*/
+    private AlertDialog.Builder ad;
 
     @Inject
     public GetSearchListUseCase searchListUseCase;
 
+    @Inject
+    public DeleteSearchUseCase deleteSearchUseCase;
+
     public void addSearch() {
-/*        broadcast = new CheckInternetBroadcast();
-        router.getActivity().registerReceiver(broadcast, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));*/
         router
                 .getActivity()
                 .startActivity(new Intent(router.getActivity(), AddNewSearch.class));
-
-
     }
 
     public MainActViewModel() {
@@ -66,6 +69,36 @@ public class MainActViewModel extends BaseViewModel {
                         router.getActivity().startActivity(intent);
                     }
                 }));
+        compositeDisposable.add(adapter.observeClickLong()
+                .subscribe(new Consumer<BaseAdapter.ItemEntity>() {
+                    @Override
+                    public void accept(BaseAdapter.ItemEntity itemEntity) throws Exception {
+                        Search search = (Search) itemEntity.model;
+                        delete(search.getNameSearch(), search.getIdSearch());
+                    }
+                }));
+    }
+
+    private void delete(String title, final String id) {
+        ad = new AlertDialog
+                .Builder(router.getActivity())
+                .setTitle("Удалить поиск \"" + title + "\"?")
+                .setPositiveButton(router.getActivity().getResources().getString(R.string.no)
+                        , new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int arg1) {
+                                return;
+                            }
+                        })
+                .setNegativeButton(router.getActivity().getResources().getString(R.string.yes)
+                        , new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int arg1) {
+                                deleteSearchUseCase
+                                        .deleteSearch(id)
+                                        .subscribe();
+                            }
+                        })
+                .setCancelable(true);
+        ad.show();
     }
 
 }

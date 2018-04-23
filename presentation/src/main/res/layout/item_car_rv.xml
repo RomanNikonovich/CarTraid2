@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
-        android:background="@{viewModel.isLow ? @color/lowPrice : @color/highPrice}">
+        android:background="@{viewModel.isLow ? @drawable/item_rv_car_new : @drawable/item_rv_car_old}">
 
         <TextView
             android:id="@+id/textView9"
@@ -34,7 +34,7 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:text="@string/price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9"
@@ -69,13 +69,15 @@
             app:layout_constraintStart_toEndOf="@+id/textView7"
             tools:text="USD" />
 
-        <ImageView
+        <TextView
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_marginEnd="16dp"
             android:visibility="@{viewModel.isNew ? V.VISIBLE : V.GONE}"
             android:text="@string/new_car"
-            android:background="#ff0000"
+            android:gravity="center"
+            android:textColor="@color/main_white"
+            android:background="@drawable/label"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

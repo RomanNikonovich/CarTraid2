@@ -69,6 +69,28 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
     }
 
     @Override
+    public Completable deleteSearch(final String id) {
+        return Completable.create(new CompletableOnSubscribe() {
+            @Override
+            public void subscribe(CompletableEmitter emitter) throws Exception {
+                try (Realm realmInstance = Realm.getDefaultInstance()) {
+                    realmInstance.executeTransactionAsync(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            SearchNet search = realm
+                                    .where(SearchNet.class)
+                                    .equalTo(ID_SEARCH, id)
+                                    .findFirst();
+                            search.deleteFromRealm();
+                        }
+                    });
+                }
+                emitter.onComplete();
+            }
+        });
+    }
+
+    @Override
     public Flowable<List<Search>> getSearchList() {
         realm = Realm.getDefaultInstance();
         return realm

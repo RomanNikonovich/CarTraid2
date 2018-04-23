@@ -20,6 +20,7 @@ import io.realm.RealmResults;
 public class CheckDataIntentService extends IntentService {
     private NotificationManager notificationManager;
     private static final String NEW_CAR = "Новых машин: ";
+    private static final String NAME_APP = "АвтоТрейдер";
     public static final int NOTIFICATION_ID = 1547895327;
     private static final String UNIQ_ACTION = "effexor.roman.nikonovich";
     private static final String NOTIF = "notif";
@@ -54,10 +55,9 @@ public class CheckDataIntentService extends IntentService {
                     try {
                         RealmResults<SearchNet> searchs = realm.where(SearchNet.class).findAll();
                         if (searchs.size() != 0) {
+                            int countNewCar = 0;
                             for (SearchNet searchDB : searchs) {
                                 RealmList<VehicleNet> carsList = ParseUrl.getCars(searchDB.getUrlSearch());
-                                if (preferences.getBoolean(NOTIF, true))
-                                    sendNotification(searchDB.getNameSearch(), carsList.size());
                                 if (carsList.size() != 0) {
                                     searchDB.getListVehicleNet().retainAll(carsList);
                                     if (searchDB.getListVehicleNet().size() != 0) {
@@ -68,14 +68,18 @@ public class CheckDataIntentService extends IntentService {
                                             for (VehicleNet vehicleNet : carsList)
                                                 vehicleNet.setNew(true);
                                             searchDB.getListVehicleNet().addAll(carsList);
-                                            //посчитать кол-во машин
-                                            /*sendNotification(searchDB.getNameSearch(), carsList.size());*/
+                                            countNewCar += carsList.size();
                                         }
                                     } else {
                                         searchDB.getListVehicleNet().addAll(carsList);
                                     }
                                 }
                             }
+                            if (preferences.getBoolean(NOTIF, true)) {
+                                if (countNewCar != 0)
+                                    sendNotification(countNewCar);
+                            }
+
                         }
                     } catch (IOException e) {
                     }
@@ -85,16 +89,16 @@ public class CheckDataIntentService extends IntentService {
     }
 
 
-    private void sendNotification(String title, int count) {
+    private void sendNotification(int count) {
         Notification notification;
         if (preferences.getBoolean(SOUND, true)) {
             notification = new NotificationCompat
                     .Builder(getApplicationContext())
                     .setSmallIcon(android.R.drawable.ic_dialog_info)
-                    .setContentTitle(title)
+                    .setContentTitle(NAME_APP)
                     .setContentText(NEW_CAR + count)
                     .setWhen(System.currentTimeMillis())
-                 /*   .setContentIntent(NotifPI)*/
+                    .setContentIntent(NotifPI.getPI(getApplicationContext()))
                     .setDefaults(Notification.DEFAULT_SOUND)
                     .setAutoCancel(true)
                     .build();
@@ -102,9 +106,9 @@ public class CheckDataIntentService extends IntentService {
             notification = new NotificationCompat
                     .Builder(getApplicationContext())
                     .setSmallIcon(android.R.drawable.ic_dialog_info)
-                    .setContentTitle(title)
+                    .setContentTitle(NAME_APP)
                     .setContentText(NEW_CAR + count)
-                  /*  .setContentIntent()*/
+                    .setContentIntent(NotifPI.getPI(getApplicationContext()))
                     .setWhen(System.currentTimeMillis())
                     .setAutoCancel(true)
                     .build();

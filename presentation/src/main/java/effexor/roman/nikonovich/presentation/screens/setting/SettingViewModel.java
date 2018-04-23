@@ -26,7 +26,7 @@ public class SettingViewModel extends BaseViewModel {
     private static final String NOTIF = "notif";
     private static final String SOUND = "sound";
     private JobScheduler jobScheduler;
-    private static final int ID_SCHEDULE = 781325796;
+    private static final int ID_SCHEDULE = 781598596;
 
     @Inject
     public AppSharedPrefs sharedPrefs;

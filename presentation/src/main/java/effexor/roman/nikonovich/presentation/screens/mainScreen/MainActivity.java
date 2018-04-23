@@ -16,7 +16,7 @@ import effexor.roman.nikonovich.data.sharedPref.AppSharedPrefs;
 import effexor.roman.nikonovich.databinding.ActivityMainBinding;
 import effexor.roman.nikonovich.presentation.base.BaseActivity;
 
-import static effexor.roman.nikonovich.data.utils.CheckDataIntentService.NOTIFICATION_ID;
+import static effexor.roman.nikonovich.presentation.utils.CheckDataIntentService.NOTIFICATION_ID;
 
 public class MainActivity extends
         BaseActivity<ActivityMainBinding, MainActViewModel, MainActRouter> {

@@ -4,7 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="secondHint">#ff0000</color>
-    <color name="firstHint">#e3282727</color>
+    <color name="main_white">#fdfdfd</color>
     <color name="lowPrice">#8c6226</color>
     <color name="highPrice">#7c7474</color>
+    <color name="divider">#be682f</color>
+
+
 </resources>

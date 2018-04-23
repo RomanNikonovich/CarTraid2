@@ -25,8 +25,7 @@
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                style="@style/tool_bar">
 
                 <include layout="@layout/name_app" />
             </android.support.v7.widget.Toolbar>
@@ -35,9 +34,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
             style="@style/styleRecycleView"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="64dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -45,8 +42,8 @@
         <ImageButton
             android:id="@+id/btnAddSearch"
             style="@style/styleBtnAdd"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="68dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="64dp"
             android:onClick="@{()->viewModel.addSearch()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

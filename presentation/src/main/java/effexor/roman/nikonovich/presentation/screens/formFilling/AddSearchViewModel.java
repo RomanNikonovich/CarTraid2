@@ -85,7 +85,7 @@ public class AddSearchViewModel extends BaseViewModel {
         if (s.toString().equals("")) {
             return;
         } else {
-            price.set(Integer.valueOf(s.toString()));
+            price.set(Integer.valueOf(s.toString().replaceAll("\\D", "")));
         }
 
     }

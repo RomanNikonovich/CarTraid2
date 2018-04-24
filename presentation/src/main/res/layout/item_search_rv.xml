@@ -4,6 +4,10 @@
 
     <data>
 
+        <import
+            alias="V"
+            type="android.view.View" />
+
         <variable
             name="viewModel"
             type="effexor.roman.nikonovich.presentation.screens.mainScreen.realiseRV.SearchViewModel" />
@@ -13,7 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/item_rv">
+        android:background="@drawable/item_rv_assem"
+      >
 
         <TextView
             android:id="@+id/nameSearch"
@@ -33,6 +38,15 @@
             android:text="@{viewModel.idSearch}"
             android:visibility="invisible"
             tools:text="asdfsadfsadffdssadf" />
+
+        <TextView
+            style="@style/label"
+            android:layout_marginEnd="16dp"
+            android:text="@{String.valueOf(viewModel.countNew)}"
+            android:visibility="@{(viewModel.countNew > 0) ? V.VISIBLE : V.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

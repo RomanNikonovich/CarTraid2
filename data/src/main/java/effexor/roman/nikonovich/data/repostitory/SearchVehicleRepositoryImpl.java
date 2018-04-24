@@ -91,6 +91,33 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
     }
 
     @Override
+    public Completable changeState(final String idSearch, final String idCar) {
+        return Completable.create(new CompletableOnSubscribe() {
+            @Override
+            public void subscribe(CompletableEmitter emitter) throws Exception {
+                try (Realm realmInstance = Realm.getDefaultInstance()) {
+                    realmInstance.executeTransactionAsync(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                                SearchNet search = realm
+                                        .where(SearchNet.class)
+                                        .equalTo(ID_SEARCH, idSearch)
+                                        .findFirst();
+                                for(VehicleNet net: search.getListVehicleNet()){
+                                    if(net.getUrl().equals(idCar)){
+                                        net.setNew(false);
+                                        return;
+                                    }
+                                }
+                        }
+                    });
+                }
+                emitter.onComplete();
+            }
+        });
+    }
+
+    @Override
     public Flowable<List<Search>> getSearchList() {
         realm = Realm.getDefaultInstance();
         return realm
@@ -102,7 +129,15 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
                     public List<Search> apply(RealmResults<SearchNet> searchNets) throws Exception {
                         List<Search> list = new ArrayList<>();
                         for (SearchNet search : searchNets) {
-                            list.add(new Search(search.getIdSearch(), search.getNameSearch(), search.getDateCreate()));
+                            int count = 0;
+                            for (VehicleNet net : search.getListVehicleNet()) {
+                                if (net.isNew())
+                                    count++;
+                            }
+                            list.add(new Search(search.getIdSearch(),
+                                    search.getNameSearch(),
+                                    search.getDateCreate(),
+                                    count));
                         }
                         return list;
                     }

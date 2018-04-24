@@ -12,6 +12,8 @@ public interface SearchVehicleRepository {
 
     Completable deleteSearch(String id);
 
+    Completable changeState(String idSearch, String idCar);
+
     Flowable<List<Search>> getSearchList();
 
     Flowable<List<Vehicle>> getCars(String id);

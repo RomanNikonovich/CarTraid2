@@ -101,5 +101,14 @@
         <item name="android:background">@drawable/tool_bar</item>
     </style>
 
+    <style name="label">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/main_white</item>
+        <item name="android:background">@drawable/label</item>
+    </style>
+
 
 </resources>

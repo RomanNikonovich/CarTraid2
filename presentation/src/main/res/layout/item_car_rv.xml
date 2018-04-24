@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginBottom="8dp"
-        android:background="@{viewModel.isLow ? @drawable/item_rv_car_new : @drawable/item_rv_car_old}">
+        android:background="@{viewModel.isLow ? @drawable/item_rv_car_new_assem : @drawable/item_rv_car_old_assem}">
 
         <TextView
             android:id="@+id/textView9"
@@ -70,14 +70,9 @@
             tools:text="USD" />
 
         <TextView
-            android:layout_width="100dp"
-            android:layout_height="35dp"
-            android:layout_marginEnd="16dp"
-            android:visibility="@{viewModel.isNew ? V.VISIBLE : V.GONE}"
+            style="@style/label"
             android:text="@string/new_car"
-            android:gravity="center"
-            android:textColor="@color/main_white"
-            android:background="@drawable/label"
+            android:visibility="@{viewModel.isNew ? V.VISIBLE : V.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

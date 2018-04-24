@@ -21,7 +21,7 @@ public class CheckDataIntentService extends IntentService {
     private NotificationManager notificationManager;
     private static final String NEW_CAR = "Новых машин: ";
     private static final String NAME_APP = "АвтоТрейдер";
-    public static final int NOTIFICATION_ID = 1547895327;
+    public static final int NOTIFICATION_ID = 577523414;
     private static final String UNIQ_ACTION = "effexor.roman.nikonovich";
     private static final String NOTIF = "notif";
     private static final String SOUND = "sound";
@@ -58,11 +58,12 @@ public class CheckDataIntentService extends IntentService {
                             int countNewCar = 0;
                             for (SearchNet searchDB : searchs) {
                                 RealmList<VehicleNet> carsList = ParseUrl.getCars(searchDB.getUrlSearch());
+                                sendNotification(carsList.size());
                                 if (carsList.size() != 0) {
                                     searchDB.getListVehicleNet().retainAll(carsList);
                                     if (searchDB.getListVehicleNet().size() != 0) {
-                                        for (VehicleNet vehicle : searchDB.getListVehicleNet())
-                                            vehicle.setNew(false);
+                                       /* for (VehicleNet vehicle : searchDB.getListVehicleNet())
+                                            vehicle.setNew(false);*///удалить
                                         carsList.removeAll(searchDB.getListVehicleNet());
                                         if (carsList.size() != 0) {
                                             for (VehicleNet vehicleNet : carsList)
@@ -75,10 +76,10 @@ public class CheckDataIntentService extends IntentService {
                                     }
                                 }
                             }
-                            if (preferences.getBoolean(NOTIF, true)) {
+                           /* if (preferences.getBoolean(NOTIF, true)) {
                                 if (countNewCar != 0)
                                     sendNotification(countNewCar);
-                            }
+                            }*/
 
                         }
                     } catch (IOException e) {
@@ -90,31 +91,19 @@ public class CheckDataIntentService extends IntentService {
 
 
     private void sendNotification(int count) {
-        Notification notification;
+        NotificationCompat.Builder builder = new NotificationCompat
+                .Builder(getApplicationContext())
+                .setSmallIcon(android.R.drawable.ic_dialog_info)
+                .setContentTitle(NAME_APP)
+                .setContentText(NEW_CAR + count)
+                .setWhen(System.currentTimeMillis())
+                .setContentIntent(NotifPI.getPI(getApplicationContext()))
+                .setAutoCancel(true);
         if (preferences.getBoolean(SOUND, true)) {
-            notification = new NotificationCompat
-                    .Builder(getApplicationContext())
-                    .setSmallIcon(android.R.drawable.ic_dialog_info)
-                    .setContentTitle(NAME_APP)
-                    .setContentText(NEW_CAR + count)
-                    .setWhen(System.currentTimeMillis())
-                    .setContentIntent(NotifPI.getPI(getApplicationContext()))
-                    .setDefaults(Notification.DEFAULT_SOUND)
-                    .setAutoCancel(true)
-                    .build();
-        } else {
-            notification = new NotificationCompat
-                    .Builder(getApplicationContext())
-                    .setSmallIcon(android.R.drawable.ic_dialog_info)
-                    .setContentTitle(NAME_APP)
-                    .setContentText(NEW_CAR + count)
-                    .setContentIntent(NotifPI.getPI(getApplicationContext()))
-                    .setWhen(System.currentTimeMillis())
-                    .setAutoCancel(true)
-                    .build();
+            builder.setDefaults(Notification.DEFAULT_SOUND);
         }
         notificationManager.notify(NOTIFICATION_ID,
-                notification);
+                builder.build());
 
     }
 }

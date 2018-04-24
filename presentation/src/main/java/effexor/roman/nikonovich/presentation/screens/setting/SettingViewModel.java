@@ -9,8 +9,6 @@ import android.databinding.ObservableInt;
 import android.databinding.ObservableLong;
 import android.widget.Toast;
 
-import java.util.concurrent.TimeUnit;
-
 import javax.inject.Inject;
 
 import effexor.roman.nikonovich.app.App;
@@ -26,7 +24,7 @@ public class SettingViewModel extends BaseViewModel {
     private static final String NOTIF = "notif";
     private static final String SOUND = "sound";
     private JobScheduler jobScheduler;
-    private static final int ID_SCHEDULE = 781598596;
+    private static final int ID_SCHEDULE = 458931792;
 
     @Inject
     public AppSharedPrefs sharedPrefs;
@@ -55,7 +53,7 @@ public class SettingViewModel extends BaseViewModel {
     private void saveScheduler() {
         jobScheduler =
                 (JobScheduler) router.getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        if (millisec.get() != 0) {
+        /*if (millisec.get() != 0) {*/
             ComponentName jobService = new ComponentName(router.getActivity(), CheckCarsJobService.class);
 
             JobInfo.Builder builder = new JobInfo
@@ -65,12 +63,14 @@ public class SettingViewModel extends BaseViewModel {
                     .setRequiresDeviceIdle(false)
                     .setPersisted(true)
                     .setRequiresCharging(false)
-                    .setBackoffCriteria(TimeUnit.SECONDS.toMillis(10),
-                            JobInfo.BACKOFF_POLICY_LINEAR)
-                    .setPeriodic(millisec.get());
+                    /*.setBackoffCriteria(TimeUnit.SECONDS.toMillis(10),
+                            JobInfo.BACKOFF_POLICY_LINEAR)*/
+                    .setPeriodic(600000);
             jobScheduler.schedule(builder.build());
-        } else {
+       /* } else {
             jobScheduler.cancel(ID_SCHEDULE);
-        }
+        }*/
     }
 }
+/*
+millisec.get()*/

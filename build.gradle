@@ -14,17 +14,7 @@ buildscript {
         classpath 'io.fabric.tools:gradle:1.+'
     }
 }
-/* типо метод для рассылки данных, qaToFabric - имя любое
-*releaseNotes - пометки для заказчика
-* AssembleRelease - это меняется в зависимости от версии какую хотим посылать заказчку*/
-task qaToFabric(dependsOn: "assembleRelease"){
-    def groupName = "qa_group"
-    def releaseNotes = ""
-    def task = tasks.create("crashlyticsUploadDistributionRelease")
-    task.ext.betaDistributionReleaseNotes = releaseNotes
-    task.ext.betaDistributionGroupAliases = groupName
-    task.execute()
-}
+
 ext {
     compileSdkVersion = 27
     minSdkVersion = 21

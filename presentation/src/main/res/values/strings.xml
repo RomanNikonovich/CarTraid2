@@ -16,11 +16,19 @@
     <string name="new_car">NEW</string>
     <string name="setting_tool_bar">Настройки</string>
     <string name="link">Связаться с разработчиком</string>
-    <string name="about_app">О программе</string>
+    <string name="about_app">О приложении</string>
     <string name="schedule">Периодичность мониторинга:</string>
     <string name="new_car_search">Присылать оповещения при появлении новых авто</string>
     <string name="sound">Звуковой сигнал при оповещении</string>
     <string name="save_setting">Сохранить настройки</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
+    <string name="email">develop.commun@gmail.com</string>
+    <string name="commun">Адрес для связи</string>
+    <string name="about_app_text">  Приложение “АвтоТерйдер” берёт информацию о продаваемых авто
+        на сайте av.by.\n От Вас требуется:\n\n -	указать максимальную сумму
+        которую готовы потратить на приобретение авто;\n -	выбрать желаемую модель
+        и прочие параметры;\n -	в настройках указать периодичность мониторинга сайта;\n\n
+    В результате приложение будет автоматически заходить в интернет и,
+        учитывая Ваши пожелания, отбирать подходящие объявления.</string>
 </resources>

@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
@@ -19,8 +17,7 @@ import effexor.roman.nikonovich.databinding.ActivitySettingBinding;
 import effexor.roman.nikonovich.presentation.base.BaseActivity;
 
 public class Setting extends
-        BaseActivity<ActivitySettingBinding, SettingViewModel, SettingRouter>
-        implements CompoundButton.OnCheckedChangeListener {
+        BaseActivity<ActivitySettingBinding, SettingViewModel, SettingRouter> {
     @Inject
     public AppSharedPrefs sharedPrefs;
 
@@ -45,12 +42,6 @@ public class Setting extends
 
         App.getAppComponent().inject(this);
 
-    /*    binding.checkBox.setOnCheckedChangeListener(this);
-        binding.checkBox.setChecked();
-
-        binding.checkBox2.setOnCheckedChangeListener(this);
-        binding.checkBox2.setChecked();
-*/
         binding.spinSchedule.setSelection(sharedPrefs.getPosition());
         binding.spinSchedule.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -77,16 +68,4 @@ public class Setting extends
         });
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        switch (compoundButton.getId()) {
-            case R.id.checkBox:
-                Toast.makeText(router.getActivity(), String.valueOf(b),
-                        Toast.LENGTH_LONG).show();
-                break;
-            case R.id.checkBox2:
-
-                break;
-        }
-    }
 }

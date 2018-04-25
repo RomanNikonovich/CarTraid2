@@ -23,7 +23,7 @@ public class GetChooseRepositoryImpl implements GetChooseRepository {
     private RestService restService;
     private Realm realm;
 
-    //FIXME - подумать обработку ошибок от реаль, может сюда запихнуть compose и удалить RestService
+    //FIXME - подумать обработку ошибок от реалм, может сюда запихнуть compose и удалить RestService
     @Inject
     public GetChooseRepositoryImpl(RestService restService) {
         this.restService = restService;

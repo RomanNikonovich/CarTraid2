@@ -58,12 +58,9 @@ public class CheckDataIntentService extends IntentService {
                             int countNewCar = 0;
                             for (SearchNet searchDB : searchs) {
                                 RealmList<VehicleNet> carsList = ParseUrl.getCars(searchDB.getUrlSearch());
-                                sendNotification(carsList.size());
                                 if (carsList.size() != 0) {
                                     searchDB.getListVehicleNet().retainAll(carsList);
                                     if (searchDB.getListVehicleNet().size() != 0) {
-                                       /* for (VehicleNet vehicle : searchDB.getListVehicleNet())
-                                            vehicle.setNew(false);*///удалить
                                         carsList.removeAll(searchDB.getListVehicleNet());
                                         if (carsList.size() != 0) {
                                             for (VehicleNet vehicleNet : carsList)
@@ -76,10 +73,10 @@ public class CheckDataIntentService extends IntentService {
                                     }
                                 }
                             }
-                           /* if (preferences.getBoolean(NOTIF, true)) {
+                            if (preferences.getBoolean(NOTIF, true)) {
                                 if (countNewCar != 0)
                                     sendNotification(countNewCar);
-                            }*/
+                            }
 
                         }
                     } catch (IOException e) {

@@ -3,7 +3,7 @@
     package="effexor.roman.nikonovich">
 
     <uses-permission android:name="android.permission.INTERNET" />
-   <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
+    <!-- <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
@@ -28,26 +28,23 @@
             android:name=".presentation.screens.formFilling.AddNewSearch"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".presentation.screens.setting.Setting" />
-        <activity android:name=".presentation.screens.contactDeveloper.ContactDeveloper" />
+        <activity
+            android:name=".presentation.screens.contactDeveloper.ContactDeveloper"
+            android:theme="@style/Theme.AppCompat.Dialog"
+            android:label="@string/commun"/>
         <activity android:name=".presentation.screens.aboutApp.AboutApp" />
         <activity android:name=".presentation.screens.searchCar.SearchCars" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="28e0d0e4b58ecefb98203ff0c96effbb222bb306" />
+
         <service android:name=".presentation.utils.CheckDataIntentService" />
-    <!--    <receiver android:name=".presentation.utils.CheckInternetBroadcast" android:enabled="true">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>-->
         <service
             android:name=".presentation.utils.CheckCarsJobService"
             android:enabled="true"
             android:exported="true"
-            android:permission="android.permission.BIND_JOB_SERVICE"
-            >
-        </service>
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

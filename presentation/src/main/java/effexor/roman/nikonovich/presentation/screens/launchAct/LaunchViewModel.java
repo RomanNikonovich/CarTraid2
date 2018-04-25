@@ -33,9 +33,6 @@ public class LaunchViewModel extends BaseViewModel {
         super.onResume();
         progress.set(false);
         if (sharedPrefs.isFirstRun()) {
-            //FIXME delete all toasts
-/*            Toast.makeText(router.getActivity(), "first",
-                    Toast.LENGTH_LONG).show();*/
             loadChooseUseCase
                     .loadChoose()
                     .subscribe(new CompletableObserver() {
@@ -46,8 +43,6 @@ public class LaunchViewModel extends BaseViewModel {
 
                         @Override
                         public void onComplete() {
- /*                           Toast.makeText(router.getActivity(), "loaded",
-                                    Toast.LENGTH_LONG).show();*/
                             sharedPrefs
                                     .saveFirstRun();
                             progress.set(true);

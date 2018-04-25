@@ -7,7 +7,6 @@ import android.content.Context;
 import android.databinding.ObservableBoolean;
 import android.databinding.ObservableInt;
 import android.databinding.ObservableLong;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 
@@ -24,7 +23,7 @@ public class SettingViewModel extends BaseViewModel {
     private static final String NOTIF = "notif";
     private static final String SOUND = "sound";
     private JobScheduler jobScheduler;
-    private static final int ID_SCHEDULE = 458931792;
+    private static final int ID_SCHEDULE = 1354848319;
 
     @Inject
     public AppSharedPrefs sharedPrefs;
@@ -40,9 +39,6 @@ public class SettingViewModel extends BaseViewModel {
     }
 
     public void saveSetting() {
-
-        Toast.makeText(router.getActivity(), String.valueOf(millisec.get()),
-                Toast.LENGTH_LONG).show();
         saveScheduler();
         sharedPrefs.setPosition(position.get());
         sharedPrefs.setBoolean(NOTIF, setNotif.get());
@@ -53,7 +49,7 @@ public class SettingViewModel extends BaseViewModel {
     private void saveScheduler() {
         jobScheduler =
                 (JobScheduler) router.getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        /*if (millisec.get() != 0) {*/
+        if (millisec.get() != 0) {
             ComponentName jobService = new ComponentName(router.getActivity(), CheckCarsJobService.class);
 
             JobInfo.Builder builder = new JobInfo
@@ -65,12 +61,11 @@ public class SettingViewModel extends BaseViewModel {
                     .setRequiresCharging(false)
                     /*.setBackoffCriteria(TimeUnit.SECONDS.toMillis(10),
                             JobInfo.BACKOFF_POLICY_LINEAR)*/
-                    .setPeriodic(600000);
+                    .setPeriodic(millisec.get());
             jobScheduler.schedule(builder.build());
-       /* } else {
-            jobScheduler.cancel(ID_SCHEDULE);
-        }*/
+        } else {
+            jobScheduler.cancelAll();
+        }
     }
 }
-/*
-millisec.get()*/
+

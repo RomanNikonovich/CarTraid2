@@ -5,6 +5,8 @@ import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.text.Editable;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,7 @@ import effexor.roman.nikonovich.presentation.base.BaseViewModel;
 import effexor.roman.nikonovich.presentation.screens.formFilling.spinerAdapter.MakeAdapterSpinner;
 import effexor.roman.nikonovich.presentation.screens.formFilling.spinerAdapter.ModelAdapterSpinner;
 import effexor.roman.nikonovich.presentation.screens.formFilling.utils.SearchingURL;
+import io.reactivex.CompletableObserver;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subscribers.DisposableSubscriber;
 
@@ -38,8 +41,10 @@ public class AddSearchViewModel extends BaseViewModel {
 
     @Inject
     Context context;
+
     @Inject
     public AddSearchUseCase addSearchUseCase;
+
     @Inject
     public GetChooseUseCase getChooseUseCase;
 
@@ -111,10 +116,24 @@ public class AddSearchViewModel extends BaseViewModel {
             return;
         } else {
             String url = SearchingURL.getURL(idMake, idModel, yearFrom, yearTo);
-            Disposable disposable = addSearchUseCase
+            addSearchUseCase
                     .addSearch(url, nameSearch.get(), price.get())
-                    .subscribe();
-            compositeDisposable.add(disposable);
+                    .subscribe(new CompletableObserver() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
             router.back();
         }
 

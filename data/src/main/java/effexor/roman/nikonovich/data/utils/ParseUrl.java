@@ -26,8 +26,9 @@ public class ParseUrl {
     public static RealmList<VehicleNet> getCars(String url) throws IOException {
         RealmList<VehicleNet> carsList = new RealmList<>();
         Document docCars = Jsoup
-                .connect(url)
-                .get();
+                    .connect(url)
+                    .get();
+        
         Elements cars = docCars
                 .select(SELECT_GET_CARS);
         Elements urlPages = docCars
@@ -75,11 +76,18 @@ public class ParseUrl {
     }
 
     private static double getCursUSD() throws IOException {
-        Document docCars = Jsoup
-                .connect(URL_PRICE_USD)
-                .get();
-        return Double.valueOf(docCars
-                .select(SELECT_GET_CURSE).get(0).text());
+        try {
+            Document docCars = Jsoup
+                    .connect(URL_PRICE_USD)
+                    .get();
+            return Double.valueOf(docCars
+                    .select(SELECT_GET_CURSE).get(0).text());
+        } catch (Exception e){
+
+        } finally {
+            return 2.6;
+        }
+
 
     }
 }

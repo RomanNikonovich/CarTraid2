@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import javax.inject.Inject;
 
+import effexor.roman.nikonovich.R;
 import effexor.roman.nikonovich.app.App;
 import effexor.roman.nikonovich.data.entity.ErrorType;
 import effexor.roman.nikonovich.data.entity.ParseError;
@@ -75,14 +76,14 @@ public class LaunchViewModel extends BaseViewModel {
         if (e instanceof ParseError) {
             ParseError myError = (ParseError) e;
             if (myError.getClearError() == ErrorType.NO_INTERNET) {
-                infoError = "Проверьте соединение с интернетом";
+                infoError = router.getActivity().getResources().getString(R.string.no_internet);
             } else if (myError.getClearError() == ErrorType.SERVER_NOT_AVAILABLE) {
-                infoError = "Сервер временно не доступен.\nПопытайтесь позже.";
+                infoError = router.getActivity().getResources().getString(R.string.no_server);
             } else {
-                infoError = "Ошибка соединения.\nПопытайтесь позже.";
+                infoError = router.getActivity().getResources().getString(R.string.no_server);
             }
         } else {
-            infoError = "Ошибка соединения.\nПопытайтесь позже.";
+            infoError = router.getActivity().getResources().getString(R.string.no_server);
         }
         return infoError;
     }

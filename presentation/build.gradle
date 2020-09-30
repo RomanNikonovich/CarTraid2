@@ -8,18 +8,8 @@ android {
         applicationId "effexor.roman.nikonovich"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 2
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-    }
-    signingConfigs {
-        debug {
-            storeFile file('../DevHuckster.jks')
-            storePassword '1451413m'
-            keyAlias 'DevHucksterAl'
-            keyPassword '1451413m'
-        }
-
+        versionCode 3
+        versionName "1.02"
     }
 
     buildTypes {

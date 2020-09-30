@@ -8,5 +8,6 @@
     <color name="lowPrice">#8c6226</color>
     <color name="highPrice">#7c7474</color>
     <color name="divider">#be682f</color>
+    <color name="rippleColor">#713005</color>
 
 </resources>

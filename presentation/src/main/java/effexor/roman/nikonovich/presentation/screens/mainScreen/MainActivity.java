@@ -22,6 +22,7 @@ public class MainActivity extends
         BaseActivity<ActivityMainBinding, MainActViewModel, MainActRouter> {
     private int countGide = 0;
     private NotificationManager notificationManager;
+
     @Inject
     public AppSharedPrefs sharedPrefs;
 

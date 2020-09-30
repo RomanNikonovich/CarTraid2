@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 
 import io.reactivex.disposables.CompositeDisposable;
 
-public class BaseViewModel<R extends BaseRouter> extends ViewModel {
+public abstract class BaseViewModel<R extends BaseRouter> extends ViewModel {
     protected CompositeDisposable compositeDisposable = new CompositeDisposable();
     @Nullable
     protected R router;

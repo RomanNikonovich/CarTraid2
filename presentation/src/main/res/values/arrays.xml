@@ -2,6 +2,8 @@
 <resources>
     <string-array name="chooseYearFrom">
         <item>С</item>
+        <item>2020</item>
+        <item>2019</item>
         <item>2018</item>
         <item>2017</item>
         <item>2016</item>
@@ -56,6 +58,8 @@
     </string-array>
     <string-array name="chooseYearTo">
         <item>По</item>
+        <item>2020</item>
+        <item>2019</item>
         <item>2018</item>
         <item>2017</item>
         <item>2016</item>

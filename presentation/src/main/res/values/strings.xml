@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">АвтоТрейдер</string>
+    <string name="no_internet">Проверьте соединение с интернетом</string>
+    <string name="no_server">Сервер временно не доступен.
+Попытайтесь позже.</string>
     <string name="NameSearch">Название поиска</string>
     <string name="MakeCar">Марка автомобиля</string>
     <string name="ModelCar">Модель автомобиля</string>

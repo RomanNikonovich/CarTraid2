@@ -3,6 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CarTraid.iml" filepath="$PROJECT_DIR$/CarTraid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/CarTraid2.iml" filepath="$PROJECT_DIR$/.idea/modules/CarTraid2.iml" group="CarTraid2" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/CarTraid2-data.iml" filepath="$PROJECT_DIR$/.idea/modules/data/CarTraid2-data.iml" group="CarTraid2/data" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/domain/CarTraid2-domain.iml" filepath="$PROJECT_DIR$/.idea/modules/domain/CarTraid2-domain.iml" group="CarTraid2/domain" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/presentation/CarTraid2-presentation.iml" filepath="$PROJECT_DIR$/.idea/modules/presentation/CarTraid2-presentation.iml" group="CarTraid2/presentation" />
       <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
       <module fileurl="file://$PROJECT_DIR$/presentation/presentation.iml" filepath="$PROJECT_DIR$/presentation/presentation.iml" />

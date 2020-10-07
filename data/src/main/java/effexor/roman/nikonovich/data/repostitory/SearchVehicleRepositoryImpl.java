@@ -50,6 +50,8 @@ public class SearchVehicleRepositoryImpl implements SearchVehicleRepository {
                             final SearchNet searchNet = new SearchNet(nameSearch, url, price);
                             try {
                                 RealmList<VehicleNet> carsList = ParseUrl.getCars(url);
+                                int i = carsList.size();
+                                int i2 = carsList.size();
                                 realm.insert(searchNet);
                                 SearchNet search = realm
                                         .where(SearchNet.class)

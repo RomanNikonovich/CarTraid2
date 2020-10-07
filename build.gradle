@@ -27,7 +27,7 @@ ext {
     archComponentVersion = '1.0.0'
     daggerVersion = '2.15'
     javaInjectVersion = '1'
-    jsoupVersion = '1.11.2'
+    jsoupVersion = '1.13.1'
     retrofit2 = '2.4.0'
     converterGsonVerson = '2.3.0'
     gsonVerson = '2.8.0'

@@ -8,8 +8,8 @@ android {
         applicationId "effexor.roman.nikonovich"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode 3
-        versionName "1.02"
+        versionCode 4
+        versionName "1.03"
     }
 
     buildTypes {

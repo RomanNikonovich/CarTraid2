@@ -11,83 +11,66 @@ import effexor.roman.nikonovich.data.entity.vehicleNet.VehicleNet;
 import io.realm.RealmList;
 
 public class ParseUrl {
-    private static final String SELECT_GET_CARS = "div.listing-item-firm, div.listing-item";
-    private static final String SELECT_GET_PAGES = "li.pages-numbers-item";
-    private static final String SELECT_GET_USD = "small";
-    private static final String SELECT_GET_RUB = "strong";
-    private static final String SELECT_GET_SIBLING = "h4>a[href]";
-    private static final String SELECT_GET_CURSE = "td.course";
-    private static final String SELECT_COUNT_PAGES = "a[href]";
+    private static final String SELECT_GET_CARS = "div.listing-item";
+    private static final String SELECT_GET_USD = "div.listing-item__priceusd";
+    private static final String SELECT_GET_RUB = "div.listing-item__price";
     private static final String ATTR = "href";
-    private static final String URL_PRICE_USD = "https://myfin.by/bank/kursy_valjut_nbrb";
-    private static double curseUSD = 0;
+    private static final String PRIME_URL = "https://cars.av.by";
+    private static final String SELECT_GET_URL = "a.listing-item__link";
+    private static final String SELECT_GET_MODEL = "span.link-text";
 
 
     public static RealmList<VehicleNet> getCars(String url) throws IOException {
+
         RealmList<VehicleNet> carsList = new RealmList<>();
         Document docCars = Jsoup
-                    .connect(url)
-                    .get();
-        
+                .connect(url)
+                .get();
+
         Elements cars = docCars
                 .select(SELECT_GET_CARS);
-        Elements urlPages = docCars
-                .select(SELECT_GET_PAGES);
-        if (urlPages.size() != 0) {
-            carsList.addAll(parsePage(cars));
-            for (int i = 1; i < urlPages.size(); i++) {
-                carsList.addAll(parsePages(urlPages.get(i).select(SELECT_COUNT_PAGES).attr(ATTR)));
-            }
-        } else {
-            carsList.addAll(parsePage(cars));
-        }
+
+        carsList.addAll(parsePage(cars));
+        carsList.addAll(parsePages(url));
+
         return carsList;
+
     }
 
     private static RealmList<VehicleNet> parsePages(String urlP) throws IOException {
-        Document docCarsPage = Jsoup
-                .connect(urlP)
-                .get();
-        Elements cars = docCarsPage
-                .select(SELECT_GET_CARS);
-        return parsePage(cars);
+        RealmList<VehicleNet> carsList = new RealmList<>();
+
+        int i = 2;
+        while (true) {
+            Document docCarsPages = Jsoup
+                    .connect(urlP + "&page=" + i)
+                    .get();
+            Elements carsPage = docCarsPages
+                    .select(SELECT_GET_CARS);
+            if (carsPage.size() != 0) {
+                carsList.addAll(parsePage(carsPage));
+                i++;
+            } else {
+                return carsList;
+            }
+
+        }
+
     }
 
     private static RealmList<VehicleNet> parsePage(Elements cars) throws IOException {
         RealmList<VehicleNet> carsList = new RealmList<>();
 
         for (Element element : cars) {
-            int priceUSD = 0;
-            if (element.select(SELECT_GET_USD).get(0).text() != null ||
-                    !element.select(SELECT_GET_USD).get(0).text().equals("")) {
-                if (curseUSD == 0) {
-                    curseUSD = getCursUSD();
-                }
-                priceUSD = (int)(Integer.valueOf(element.select(SELECT_GET_RUB).get(0).text()
-                        .replaceAll("\\D", ""))/curseUSD);
-            }
+            int priceUSD = (int) (Integer.valueOf(element.select(SELECT_GET_USD).text()
+                    .replaceAll("\\D", "")));
             carsList.add(new VehicleNet(
-                    element.select(SELECT_GET_SIBLING).attr(ATTR),
-                    element.select(SELECT_GET_SIBLING).text(),
-                    element.select(SELECT_GET_RUB).get(0).text(),
+                    PRIME_URL + element.select(SELECT_GET_URL).attr(ATTR),
+                    element.select(SELECT_GET_MODEL).text(),
+                    element.select(SELECT_GET_RUB).text(),
                     priceUSD));
         }
         return carsList;
     }
 
-    private static double getCursUSD() throws IOException {
-        try {
-            Document docCars = Jsoup
-                    .connect(URL_PRICE_USD)
-                    .get();
-            return Double.valueOf(docCars
-                    .select(SELECT_GET_CURSE).get(0).text());
-        } catch (Exception e){
-
-        } finally {
-            return 2.6;
-        }
-
-
-    }
 }
